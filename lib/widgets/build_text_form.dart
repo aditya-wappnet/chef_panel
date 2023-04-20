@@ -16,6 +16,8 @@ class BuildTextFormField extends StatefulWidget {
   TextEditingController? controller;
   final VoidCallback? onClicked;
   TextCapitalization? textCapitalization;
+  Color? errorTextColor;
+  TextInputAction? textInputAction;
 
   //Text Form Widget
   BuildTextFormField({
@@ -31,6 +33,8 @@ class BuildTextFormField extends StatefulWidget {
     this.autofocus,
     this.enabled,
     this.textCapitalization,
+    this.errorTextColor,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -51,7 +55,8 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
           });
         },
         textCapitalization:
-            widget.textCapitalization ?? TextCapitalization.words,
+            widget.textCapitalization ?? TextCapitalization.none,
+        textInputAction: widget.textInputAction ?? TextInputAction.next,
         enabled: widget.enabled ?? true,
         autofocus: widget.autofocus ?? false,
         validator: widget.validation,
@@ -63,7 +68,6 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
         controller: widget.controller,
         style: GoogleFonts.roboto(
             fontSize: 28.sp, color: Colors.white, fontWeight: FontWeight.w600),
-        textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           suffixIcon: widget.icon,
           prefixIcon: widget.leftIcon,
@@ -72,8 +76,8 @@ class _BuildTextFormFieldState extends State<BuildTextFormField> {
           border: InputBorder.none,
           isDense: false,
           labelText: widget.txtHint,
-          errorStyle: const TextStyle(
-            color: Colors.red,
+          errorStyle: TextStyle(
+            color: widget.errorTextColor ?? Colors.red,
             overflow: TextOverflow.ellipsis,
           ),
           labelStyle: GoogleFonts.roboto(

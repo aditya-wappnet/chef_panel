@@ -17,7 +17,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   ValueNotifier<int> _currentIndex = ValueNotifier<int>(0);
 
-  final List<Widget> _pages = [HomeScreen(), CompletedOrder()];
+  final List<Widget> _pages = [HomeScreen(), const CompletedOrder()];
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     /// Home
                     SalomonBottomBarItem(
                       icon: const Icon(Icons.food_bank),
-                      title: Text(
+                      title: const Text(
                         'Orders',
                       ),
                       selectedColor: Colors.black,
@@ -67,7 +67,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
                     SalomonBottomBarItem(
                       icon: const Icon(Icons.done_rounded),
-                      title: Text(
+                      title: const Text(
                         'Completed Orders',
                       ),
                       selectedColor: Colors.black,
