@@ -33,7 +33,7 @@ class SecondaryColor {
   static const Color whiteColor = Color(0xFFFBFBFB);
   static const Color greyColor = Color(0xFFA5A5A5);
   static Color greyIconColor = Colors.black.withOpacity(0.7);
-  static Color cardBackgroundColor = Color(0xFFCAE1FF);
+  static Color cardBackgroundColor = const Color(0xFFCAE1FF);
 }
 
 class NeutralColor {

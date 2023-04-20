@@ -1,4 +1,4 @@
-const String APP_NAME = "Co-Vaccine";
+/* const String APP_NAME = "Co-Vaccine";
 const String WELCOME_TO = "Welcome Parent !";
 const String LOGIN = " Login";
 const String SIGN_UP = "Sign Up";
@@ -20,3 +20,4 @@ const String? ALREADY_ACCOUNT = "Already have an account ? ";
 const String REGISTER = "Register";
 const String CONTINUE = "Continue";
 const String VERIFY_OTP = "Verify OTP";
+ */

@@ -18,7 +18,7 @@ class Routes {
 
       case RoutesName.homeView:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const HomeScreen());
+            builder: (BuildContext context) => HomeScreen());
 
       case RoutesName.completedOrder:
         return MaterialPageRoute(

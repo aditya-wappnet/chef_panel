@@ -42,10 +42,11 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
 
   contentBox(context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: <Widget>[
         Container(
           padding: EdgeInsets.only(
-              left: 20.sp, top: 65.sp, right: 20.sp, bottom: 20.sp),
+              left: 20.sp, top: 50.sp, right: 20.sp, bottom: 20.sp),
           margin: EdgeInsets.only(top: 45.sp),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
@@ -59,31 +60,31 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                 widget.heading ?? "",
                 style: GoogleFonts.roboto(
                   color: Colors.black,
-                  fontSize: 24.sp,
+                  fontSize: 54.sp,
                   fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 7.h,
+                height: 10.h,
               ),
               Text(
                 widget.title ?? "",
                 style: GoogleFonts.roboto(
                   color: Colors.black,
-                  fontSize: 16.sp,
+                  fontSize: 30.sp,
                   fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 7.h,
+                height: 10.h,
               ),
               Text(
                 widget.descriptions!,
                 style: GoogleFonts.roboto(
                   color: Colors.black,
-                  fontSize: 12.sp,
+                  fontSize: 28.sp,
                   fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.center,
@@ -97,8 +98,8 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   widget.btn1Text == ""
                       ? const SizedBox()
                       : SizedBox(
-                          height: 40.h,
-                          width: 130.w,
+                          height: 50.h,
+                          width: 200.w,
                           child: ElevatedButton(
                             onPressed: () {
                               widget.onClicked!();
@@ -112,7 +113,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                               widget.btn1Text!,
                               style: GoogleFonts.roboto(
                                 color: Colors.white,
-                                fontSize: 14.sp,
+                                fontSize: 28.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -124,8 +125,8 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   widget.btn2Text == ""
                       ? const SizedBox()
                       : SizedBox(
-                          height: 40.h,
-                          width: 130.w,
+                          height: 50.h,
+                          width: 200.w,
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -138,7 +139,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                               widget.btn2Text!,
                               style: GoogleFonts.roboto(
                                 color: Colors.white,
-                                fontSize: 14.sp,
+                                fontSize: 28.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -149,28 +150,29 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             ],
           ),
         ),
-        Positioned(
-          left: 20.sp,
-          right: 20.sp,
+        /*  Positioned(
+          top: -20,
+          left: 30.sp,
+          right: 30.sp,
           child: CircleAvatar(
             backgroundColor: Colors.white,
-            radius: 50.sp,
+            radius: 100.sp,
             child: CircleAvatar(
               backgroundColor: widget.backgroundColor ?? Colors.red,
-              radius: 45.sp,
+              radius: 90.sp,
               child: IconButton(
                 padding: EdgeInsets.zero,
                 icon: widget.icon ??
                     Icon(
                       Icons.delete_forever_rounded,
-                      size: 50.sp,
+                      size: 100.sp,
                     ),
                 color: Colors.white,
                 onPressed: () {},
               ),
             ),
           ),
-        )
+        ) */
       ],
     );
   }
