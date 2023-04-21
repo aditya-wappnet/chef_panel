@@ -2,8 +2,8 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:chef_panel/firebase_options.dart';
 import 'package:chef_panel/provider/log_in_provider.dart';
 import 'package:chef_panel/routes/app_route.dart';
-import 'package:chef_panel/routes/routes_const.dart';
 import 'package:chef_panel/screens/login_screen/login_screen.dart';
+import 'package:chef_panel/widgets/bottom_nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +29,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    /*  final provider = Provider.of<LoginInProvider>(context, listen: false);
-    provider.checkIfUserIsLoggedIn(context); */
     super.initState();
   }
 
@@ -55,9 +53,6 @@ class _MyAppState extends State<MyApp> {
                   useMaterial3: true,
                   colorSchemeSeed: Colors.purple,
                 ),
-                initialRoute: auth.currentUser != null
-                    ? RoutesName.bottomBar
-                    : RoutesName.siginView,
                 onGenerateRoute: Routes.generateRoute,
                 home: AnimatedSplashScreen(
                   duration: 3000,
@@ -72,7 +67,8 @@ class _MyAppState extends State<MyApp> {
                       width: 500.w,
                     ),
                   ),
-                  nextScreen: LoginScreen(),
+                  nextScreen:
+                      auth.currentUser != null ? BottomNavBar() : LoginScreen(),
                 ));
           }),
     );

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_const_constructors_in_immutables
 
 import 'package:chef_panel/provider/log_in_provider.dart';
 import 'package:chef_panel/widgets/app_button.dart';

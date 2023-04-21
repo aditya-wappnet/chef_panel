@@ -5,6 +5,8 @@ import 'package:chef_panel/screens/login_screen/login_screen.dart';
 import 'package:chef_panel/widgets/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/order_detail_screen/order_detail_screen.dart';
+
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -18,11 +20,15 @@ class Routes {
 
       case RoutesName.homeView:
         return MaterialPageRoute(
-            builder: (BuildContext context) => HomeScreen());
+            builder: (BuildContext context) => const HomeScreen());
 
       case RoutesName.completedOrder:
         return MaterialPageRoute(
             builder: (BuildContext context) => const CompletedOrder());
+
+      case RoutesName.orderDetailView:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => OrderDetailScreen());
 
       default:
         // SystemNavigator.pop();

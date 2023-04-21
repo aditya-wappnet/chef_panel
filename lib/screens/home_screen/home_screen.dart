@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:chef_panel/routes/routes_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,46 +82,53 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                SizedBox(
-                  height: 180.h,
-                  width: double.infinity,
-                  child: Card(
-                    elevation: 4,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Lottie.asset('assets/images/ic_cooking.json',
-                                  height: 150.h),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'Table No : 5',
-                                    style: GoogleFonts.roboto(fontSize: 34.sp),
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Text(
-                                    'Order Category : Chinese',
-                                    style: GoogleFonts.roboto(fontSize: 34.sp),
-                                  )
-                                ],
-                              ),
-                              Center(
-                                child: Icon(
-                                  Icons.arrow_circle_right,
-                                  size: 80.sp,
-                                  color: Colors.black12,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesName.orderDetailView);
+                  },
+                  child: SizedBox(
+                    height: 180.h,
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Lottie.asset('assets/images/ic_cooking.json',
+                                    height: 150.h),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'Table No : 5',
+                                      style:
+                                          GoogleFonts.roboto(fontSize: 34.sp),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Text(
+                                      'Order Timing  : 10:25 AM',
+                                      style:
+                                          GoogleFonts.roboto(fontSize: 34.sp),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ])
-                      ],
+                                Center(
+                                  child: Icon(
+                                    Icons.arrow_circle_right,
+                                    size: 80.sp,
+                                    color: Colors.black12,
+                                  ),
+                                )
+                              ])
+                        ],
+                      ),
                     ),
                   ),
                 )
