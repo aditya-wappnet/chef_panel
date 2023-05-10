@@ -47,6 +47,9 @@ dependencies:
   firebase_core: ^2.10.0
   simple_fontellico_progress_dialog: ^0.3.0
   shrink_sidemenu: ^2.0.0+2-null-safety
+  firebase_storage: ^11.1.1
+  shared_preferences: ^2.1.1
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:

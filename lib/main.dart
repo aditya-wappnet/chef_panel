@@ -1,26 +1,34 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:chef_panel/firebase_options.dart';
-import 'package:chef_panel/provider/log_in_provider.dart';
-import 'package:chef_panel/routes/app_route.dart';
-import 'package:chef_panel/screens/login_screen/login_screen.dart';
-import 'package:chef_panel/widgets/bottom_nav.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import 'package:chef_panel/firebase_options.dart';
+import 'package:chef_panel/provider/log_in_provider.dart';
+import 'package:chef_panel/routes/app_route.dart';
+import 'package:chef_panel/screens/login_screen/login_screen.dart';
+import 'package:chef_panel/widgets/bottom_nav.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  final isLoggedIn = await LoginInProvider.checkUserLogin();
+
+  runApp(MyApp(
+    isLoggedIn: isLoggedIn,
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool? isLoggedIn;
+  const MyApp({
+    Key? key,
+    this.isLoggedIn,
+  }) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -34,7 +42,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth auth = FirebaseAuth.instance;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -68,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                   nextScreen:
-                      auth.currentUser != null ? BottomNavBar() : LoginScreen(),
+                      widget.isLoggedIn! ? const BottomNavBar() : LoginScreen(),
                 ));
           }),
     );

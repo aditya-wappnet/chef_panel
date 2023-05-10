@@ -31,8 +31,8 @@ String? passwordValidator(String? value) {
 
   if (value!.isEmpty) {
     return 'Please this field must be filled';
-  } else if (!regex.hasMatch(value)) {
+  } /* else if (!regex.hasMatch(value)) {
     return 'Use 8 or more characters with a mix of capital and small \nletters,numbers & symbols';
-  }
+  } */
   return null;
 }

@@ -24,7 +24,7 @@ class Routes {
 
       case RoutesName.completedOrder:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const CompletedOrder());
+            builder: (BuildContext context) => const NotificationScreen());
 
       case RoutesName.orderDetailView:
         return MaterialPageRoute(

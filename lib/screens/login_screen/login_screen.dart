@@ -21,8 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     final provider = Provider.of<LoginInProvider>(context, listen: false);
-    provider.signemailController.text = "ram@gmail.com";
-    provider.signpassController.text = "Ram@1234";
+    provider.onInit();
+
     super.initState();
   }
 
@@ -154,9 +154,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                           onTap: () {
                                             if (logininFormKey.currentState!
                                                 .validate()) {
-                                              provider
-                                                  .signInWithEmailAndPassword(
-                                                      context);
+                                              Map data = {
+                                                'email': provider
+                                                    .signemailController.text
+                                                    .toString(),
+                                                'password': provider
+                                                    .signpassController.text
+                                                    .toString(),
+                                              };
+                                              provider.loginApi(data, context);
                                             }
                                           },
                                           child: AppButton(

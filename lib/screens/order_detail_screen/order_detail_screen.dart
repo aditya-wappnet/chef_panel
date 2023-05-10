@@ -21,7 +21,12 @@ class OrderDetailScreen extends StatelessWidget {
     OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
     OrderedFoodItem(
         category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
-    OrderedFoodItem(category: 'Drinks', menuItem: 'Soda', quantity: 3),
+    OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
+    OrderedFoodItem(
+        category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
+    OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
+    OrderedFoodItem(
+        category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
     OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
     OrderedFoodItem(
         category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
@@ -33,7 +38,7 @@ class OrderDetailScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          iconTheme: IconThemeData(
+          iconTheme: const IconThemeData(
             color: Colors.white, // Set the color of the icon
           ),
         ),
@@ -87,19 +92,24 @@ class OrderDetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 30.h,
                   ),
-                  AppButton(
-                      sizes: 30.sp,
-                      height: 70.h,
-                      width: 300.w,
-                      text: 'Preparing'),
-                  SizedBox(
-                    height: 30.h,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        AppButton(
+                            sizes: 30.sp,
+                            height: 70.h,
+                            width: 300.w,
+                            text: 'Preparing'),
+                        AppButton(
+                            sizes: 30.sp,
+                            height: 70.h,
+                            width: 300.w,
+                            text: 'Completed'),
+                      ],
+                    ),
                   ),
-                  AppButton(
-                      sizes: 30.sp,
-                      height: 70.h,
-                      width: 300.w,
-                      text: 'Completed'),
                 ],
               ),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CompletedOrder extends StatelessWidget {
-  const CompletedOrder({super.key});
+class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

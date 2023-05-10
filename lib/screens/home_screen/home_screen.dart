@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:chef_panel/models/order_model.dart';
 import 'package:chef_panel/routes/routes_const.dart';
+import 'package:chef_panel/services/firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LoginInProvider>(context, listen: false);
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -66,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                                   btn1Text: 'Logout',
                                   btn2Text: 'Cancel',
                                   onClicked: () {
-                                    provider.signOut(context);
+                                    provider.logout(context);
                                   },
                                 );
                               });
@@ -82,56 +85,83 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.orderDetailView);
-                  },
-                  child: SizedBox(
-                    height: 180.h,
-                    width: double.infinity,
-                    child: Card(
-                      elevation: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Lottie.asset('assets/images/ic_cooking.json',
-                                    height: 150.h),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'Table No : 5',
-                                      style:
-                                          GoogleFonts.roboto(fontSize: 34.sp),
+                Expanded(
+                  child: StreamBuilder<List<OrderModel>>(
+                      stream: FireStoreService().getOrders(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<OrderModel>> snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                        if (!snapshot.hasData) {
+                          return const Text('Loading...');
+                        }
+
+                        return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              var data = snapshot.data![index];
+
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, RoutesName.orderDetailView);
+                                },
+                                child: SizedBox(
+                                  height: 180.h,
+                                  width: double.infinity,
+                                  child: Card(
+                                    elevation: 4,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Lottie.asset(
+                                                  'assets/images/ic_cooking.json',
+                                                  height: 150.h),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Text(
+                                                    'Table No : ${data.tableNo}',
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 34.sp),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                  Text(
+                                                    'Order Timing  :${data.createdAt!.split(" ")[1].split(".")[0]}',
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 34.sp),
+                                                  )
+                                                ],
+                                              ),
+                                              Center(
+                                                child: Icon(
+                                                  Icons.arrow_circle_right,
+                                                  size: 80.sp,
+                                                  color: Colors.black12,
+                                                ),
+                                              )
+                                            ])
+                                      ],
                                     ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Text(
-                                      'Order Timing  : 10:25 AM',
-                                      style:
-                                          GoogleFonts.roboto(fontSize: 34.sp),
-                                    )
-                                  ],
-                                ),
-                                Center(
-                                  child: Icon(
-                                    Icons.arrow_circle_right,
-                                    size: 80.sp,
-                                    color: Colors.black12,
                                   ),
-                                )
-                              ])
-                        ],
-                      ),
-                    ),
-                  ),
-                )
+                                ),
+                              );
+                            });
+                      }),
+                ),
               ],
             ),
           ),
