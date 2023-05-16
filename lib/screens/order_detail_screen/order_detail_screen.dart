@@ -1,39 +1,45 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_final_fields, must_be_immutable
 
-import 'package:chef_panel/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class OrderedFoodItem {
-  final String category;
-  final String menuItem;
-  final int quantity;
+import 'package:chef_panel/models/order_model.dart';
+import 'package:chef_panel/widgets/app_button.dart';
 
-  OrderedFoodItem(
-      {required this.category, required this.menuItem, required this.quantity});
+import '../../provider/get_all_order.dart';
+import '../../widgets/custom_dailog.dart';
+
+class Item {
+  dynamic itemName;
+  dynamic itemPrice;
+  dynamic quantity;
+  dynamic total;
+
+  Item({
+    required this.itemName,
+    required this.itemPrice,
+    required this.quantity,
+    required this.total,
+  });
 }
 
 class OrderDetailScreen extends StatelessWidget {
-  OrderDetailScreen({super.key});
-
-  List<OrderedFoodItem> _orderedFoodItems = [
-    OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
-    OrderedFoodItem(
-        category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
-    OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
-    OrderedFoodItem(
-        category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
-    OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
-    OrderedFoodItem(
-        category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
-    OrderedFoodItem(category: 'Appetizers', menuItem: 'Nachos', quantity: 2),
-    OrderedFoodItem(
-        category: 'Entrees', menuItem: 'Chicken Alfredo', quantity: 1),
-  ];
+  int? id;
+  String? orderStatus;
+  final List<CartItems>? itemList;
+  OrderDetailScreen({
+    Key? key,
+    this.id,
+    this.orderStatus,
+    this.itemList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final orderProvider = Provider.of<GetOrders>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -65,10 +71,9 @@ class OrderDetailScreen extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: _orderedFoodItems.length,
+                    itemCount: itemList!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      OrderedFoodItem orderedFoodItem =
-                          _orderedFoodItems[index];
+                      final item = itemList![index];
                       return Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 30.sp, vertical: 10.sp),
@@ -76,12 +81,12 @@ class OrderDetailScreen extends StatelessWidget {
                           child: ListTile(
                             leading: Image.asset('assets/images/ic_cook.png'),
                             title: Text(
-                              orderedFoodItem.menuItem,
+                              item.itemName!,
                               style: GoogleFonts.roboto(
                                   color: Colors.black, fontSize: 40.sp),
                             ),
                             subtitle: Text(
-                                'Category: ${orderedFoodItem.category}, Quantity: ${orderedFoodItem.quantity}',
+                                'item price: ${item.itemPrice}, Quantity: ${item.quantity}',
                                 style: GoogleFonts.roboto(
                                     color: Colors.black, fontSize: 34.sp)),
                           ),
@@ -97,16 +102,47 @@ class OrderDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        if (orderStatus != "preparing")
+                          GestureDetector(
+                            onTap: () {
+                              orderProvider.ispreparing
+                                  ? const Center(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return CustomDialogBox(
+                                            heading: "Preparing",
+                                            title:
+                                                "Are you sure you want to update Order status to preparing ?",
+                                            descriptions: "",
+                                            btn1Text: "Yes",
+                                            btn2Text: "Cancel",
+                                            icon: const Icon(Icons.clear),
+                                            onClicked: () {
+                                              orderProvider.updatePreparing(
+                                                  id, 'preparing', context);
+                                              Navigator.pop(context);
+                                            });
+                                      });
+                            },
+                            child: AppButton(
+                                sizes: 30.sp,
+                                height: 70.h,
+                                width: 200.w,
+                                text: 'Preparing'),
+                          ),
                         AppButton(
                             sizes: 30.sp,
                             height: 70.h,
-                            width: 300.w,
-                            text: 'Preparing'),
-                        AppButton(
-                            sizes: 30.sp,
-                            height: 70.h,
-                            width: 300.w,
+                            width: 220.w,
                             text: 'Completed'),
+                        AppButton(
+                            sizes: 30.sp,
+                            height: 70.h,
+                            width: 220.w,
+                            text: 'Cancel Order'),
                       ],
                     ),
                   ),

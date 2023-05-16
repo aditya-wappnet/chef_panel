@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<LoginInProvider>(context, listen: false);
+    final provider = Provider.of<LoginInProvider>(context);
     final size = MediaQuery.of(context).size;
     return GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -165,10 +165,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                               provider.loginApi(data, context);
                                             }
                                           },
-                                          child: AppButton(
-                                              sizes: 20,
-                                              height: 60.h,
-                                              text: 'SignIn'),
+                                          child: provider.loading == true
+                                              ? Center(
+                                                  child:
+                                                      CircularProgressIndicator())
+                                              : AppButton(
+                                                  sizes: 20,
+                                                  height: 60.h,
+                                                  text: 'SignIn'),
                                         )
                                       ])))
                         ])),

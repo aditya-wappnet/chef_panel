@@ -11,6 +11,7 @@ class AuthRepository {
     try {
       dynamic response = await _apiServices.getPostApiResponse(
           ApiEndPoint.baseUrl + ApiEndPoint.authEndPoint.login, data);
+
       return response;
     } catch (e) {
       rethrow;

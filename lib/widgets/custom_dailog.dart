@@ -150,29 +150,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             ],
           ),
         ),
-        /*  Positioned(
-          top: -20,
-          left: 30.sp,
-          right: 30.sp,
-          child: CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 100.sp,
-            child: CircleAvatar(
-              backgroundColor: widget.backgroundColor ?? Colors.red,
-              radius: 90.sp,
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                icon: widget.icon ??
-                    Icon(
-                      Icons.delete_forever_rounded,
-                      size: 100.sp,
-                    ),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-          ),
-        ) */
+     
       ],
     );
   }

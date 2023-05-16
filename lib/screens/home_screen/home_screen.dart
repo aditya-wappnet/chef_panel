@@ -1,23 +1,27 @@
-import 'dart:developer';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:chef_panel/models/order_model.dart';
-import 'package:chef_panel/routes/routes_const.dart';
-import 'package:chef_panel/services/firestore_services.dart';
+import 'package:chef_panel/helper/colors/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
+import 'package:chef_panel/models/order_model.dart';
+import 'package:chef_panel/provider/get_all_order.dart';
+import 'package:chef_panel/screens/order_detail_screen/order_detail_screen.dart';
 
 import '../../provider/log_in_provider.dart';
 import '../../widgets/custom_dailog.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LoginInProvider>(context, listen: false);
+    final orderProvider = Provider.of<GetOrders>(context, listen: false);
 
     return SafeArea(
       child: Scaffold(
@@ -38,20 +42,8 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          log("message");
-                        },
-                        child: Image.asset(
-                          'assets/images/ic_show.png',
-                          height: 60.h,
-                        ),
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
@@ -86,173 +78,111 @@ class HomeScreen extends StatelessWidget {
                   height: 10.h,
                 ),
                 Expanded(
-                  child: StreamBuilder<List<OrderModel>>(
-                      stream: FireStoreService().getOrders(),
+                  child: StreamBuilder<List<Data>>(
+                      stream: orderProvider.orderStream(),
                       builder: (BuildContext context,
-                          AsyncSnapshot<List<OrderModel>> snapshot) {
+                          AsyncSnapshot<List<Data>> snapshot) {
                         if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         }
                         if (!snapshot.hasData) {
-                          return const Text('Loading...');
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
 
-                        return ListView.builder(
-                            itemCount: snapshot.data!.length,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              var data = snapshot.data![index];
+                        return snapshot.data!.isEmpty
+                            ? Center(
+                                child: Text(
+                                'No orders',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: SecondaryColor.cardBackgroundColor),
+                              ))
+                            : ListView.builder(
+                                itemCount: snapshot.data!.length,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  var data = snapshot.data![index];
 
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, RoutesName.orderDetailView);
-                                },
-                                child: SizedBox(
-                                  height: 180.h,
-                                  width: double.infinity,
-                                  child: Card(
-                                    elevation: 4,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Lottie.asset(
-                                                  'assets/images/ic_cooking.json',
-                                                  height: 150.h),
-                                              Column(
+                                  var cartItem =
+                                      snapshot.data![index].cartItems;
+
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                OrderDetailScreen(
+                                              id: data.id,
+                                              orderStatus: data.orderStatus,
+                                              itemList: cartItem,
+                                            ),
+                                          ));
+                                    },
+                                    child: SizedBox(
+                                      height: 180.h,
+                                      width: double.infinity,
+                                      child: Card(
+                                        elevation: 4,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
-                                                        .spaceEvenly,
+                                                        .spaceAround,
                                                 children: [
-                                                  Text(
-                                                    'Table No : ${data.tableNo}',
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 34.sp),
+                                                  Image.asset(
+                                                      'assets/images/ic_cook_new.png',
+                                                      height: 100.h),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Text(
+                                                        'Table No : ${data.tableNo.toString()}',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize:
+                                                                    34.sp),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.h,
+                                                      ),
+                                                      Text(
+                                                        'Order Timing  :${data.createdAt!.split("T")[1].split(".")[0]}',
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize:
+                                                                    34.sp),
+                                                      )
+                                                    ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 10.h,
-                                                  ),
-                                                  Text(
-                                                    'Order Timing  :${data.createdAt!.split(" ")[1].split(".")[0]}',
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 34.sp),
+                                                  Center(
+                                                    child: Icon(
+                                                      Icons.arrow_circle_right,
+                                                      size: 80.sp,
+                                                      color: Colors.black12,
+                                                    ),
                                                   )
-                                                ],
-                                              ),
-                                              Center(
-                                                child: Icon(
-                                                  Icons.arrow_circle_right,
-                                                  size: 80.sp,
-                                                  color: Colors.black12,
-                                                ),
-                                              )
-                                            ])
-                                      ],
+                                                ])
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            });
+                                  );
+                                });
                       }),
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildMenu() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 50.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 22.0,
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  "Hello, John Doe",
-                  style: TextStyle(color: Colors.white),
-                ),
-                SizedBox(height: 20.0),
-              ],
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.home, size: 20.0, color: Colors.white),
-            title: const Text("Home"),
-            textColor: Colors.white,
-            dense: true,
-          ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.verified_user,
-                size: 20.0, color: Colors.white),
-            title: const Text("Profile"),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.monetization_on,
-                size: 20.0, color: Colors.white),
-            title: const Text("Wallet"),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.shopping_cart,
-                size: 20.0, color: Colors.white),
-            title: const Text("Cart"),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {},
-            leading:
-                const Icon(Icons.star_border, size: 20.0, color: Colors.white),
-            title: const Text("Favorites"),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {},
-            leading:
-                const Icon(Icons.settings, size: 20.0, color: Colors.white),
-            title: const Text("Settings"),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-        ],
       ),
     );
   }

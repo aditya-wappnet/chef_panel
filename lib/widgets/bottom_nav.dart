@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field, prefer_final_fields, must_be_immutable
 
-import 'package:chef_panel/screens/completed_order_screen.dart/completed_order.dart';
+import 'package:chef_panel/screens/notification/notification_screen.dart';
 import 'package:chef_panel/screens/home_screen/home_screen.dart';
 import 'package:chef_panel/widgets/custom_dailog.dart';
 import 'package:flutter/material.dart';

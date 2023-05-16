@@ -386,6 +386,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "shimmer",
+      "rootUri": "file:///home/wappnet-56/.pub-cache/hosted/pub.dev/shimmer-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shrink_sidemenu",
       "rootUri": "file:///home/wappnet-56/.pub-cache/hosted/pub.dev/shrink_sidemenu-2.0.0+2-null-safety",
       "packageUri": "lib/",
@@ -470,7 +476,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-09T15:09:16.415384Z",
+  "generated": "2023-05-12T10:27:27.544030Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

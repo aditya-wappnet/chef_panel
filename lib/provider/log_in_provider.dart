@@ -14,7 +14,7 @@ class LoginInProvider with ChangeNotifier {
 
   void onInit() {
     signemailController.text = "chef@gmail.com";
-    signpassController.text = "lalu@123";
+    signpassController.text = "admin@123";
   }
 
   final _myRepo = AuthRepository();
@@ -28,6 +28,7 @@ class LoginInProvider with ChangeNotifier {
   }
 
   Future<void> loginApi(dynamic data, BuildContext context) async {
+    print(data);
     setLoading(true);
     _myRepo.loginApi(data).then((value) async {
       setLoading(false);
