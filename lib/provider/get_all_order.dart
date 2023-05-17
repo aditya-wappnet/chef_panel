@@ -2,9 +2,8 @@
 
 import 'package:chef_panel/models/order_model.dart';
 import 'package:chef_panel/repository/get_orders_repository.dart';
+import 'package:chef_panel/routes/routes_const.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/custom_dailog.dart';
 
 class GetOrders with ChangeNotifier {
   final _myRepo = OrderRepository();
@@ -68,8 +67,25 @@ class GetOrders with ChangeNotifier {
     try {
       if (response != null) {
         if (response.statusCode == 200) {
-          await getCustomerOrder();
           setLoading(false);
+          Navigator.popAndPushNamed(context, RoutesName.bottomBar);
+        } else {}
+      }
+    } catch (e, stackTrace) {
+      print(e);
+      print('Stack trace: $stackTrace');
+    }
+    // Return an empty list if there was an error
+  }
+
+  Future<void> cancelOrder(dynamic param, BuildContext context) async {
+    var response = await _myRepo.cancelOrder(param);
+    setLoading(true);
+    try {
+      if (response != null) {
+        if (response.statusCode == 200) {
+          setLoading(false);
+          Navigator.popAndPushNamed(context, RoutesName.bottomBar);
         } else {}
       }
     } catch (e, stackTrace) {

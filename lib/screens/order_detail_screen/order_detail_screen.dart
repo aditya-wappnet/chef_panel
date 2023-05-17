@@ -105,27 +105,23 @@ class OrderDetailScreen extends StatelessWidget {
                         if (orderStatus != "preparing")
                           GestureDetector(
                             onTap: () {
-                              orderProvider.ispreparing
-                                  ? const Center(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return CustomDialogBox(
-                                            heading: "Preparing",
-                                            title:
-                                                "Are you sure you want to update Order status to preparing ?",
-                                            descriptions: "",
-                                            btn1Text: "Yes",
-                                            btn2Text: "Cancel",
-                                            icon: const Icon(Icons.clear),
-                                            onClicked: () {
-                                              orderProvider.updatePreparing(
-                                                  id, 'preparing', context);
-                                              Navigator.pop(context);
-                                            });
-                                      });
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CustomDialogBox(
+                                        heading: "Preparing",
+                                        title:
+                                            "Are you sure you want to update Order status to preparing ?",
+                                        descriptions: "",
+                                        btn1Text: "Yes",
+                                        btn2Text: "Cancel",
+                                        icon: const Icon(Icons.clear),
+                                        onClicked: () {
+                                          orderProvider.updatePreparing(
+                                              id, 'preparing', context);
+                                          Navigator.pop(context);
+                                        });
+                                  });
                             },
                             child: AppButton(
                                 sizes: 30.sp,
@@ -133,16 +129,58 @@ class OrderDetailScreen extends StatelessWidget {
                                 width: 200.w,
                                 text: 'Preparing'),
                           ),
-                        AppButton(
-                            sizes: 30.sp,
-                            height: 70.h,
-                            width: 220.w,
-                            text: 'Completed'),
-                        AppButton(
-                            sizes: 30.sp,
-                            height: 70.h,
-                            width: 220.w,
-                            text: 'Cancel Order'),
+                        if (orderStatus == "preparing")
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CustomDialogBox(
+                                        heading: "Completed",
+                                        title:
+                                            "Are you sure you want to update Order status to completed ?",
+                                        descriptions: "",
+                                        btn1Text: "Yes",
+                                        btn2Text: "Cancel",
+                                        icon: const Icon(Icons.clear),
+                                        onClicked: () {
+                                          orderProvider.updatePreparing(
+                                              id, 'completed', context);
+                                          Navigator.pop(context);
+                                        });
+                                  });
+                            },
+                            child: AppButton(
+                                sizes: 30.sp,
+                                height: 70.h,
+                                width: 220.w,
+                                text: 'Completed'),
+                          ),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CustomDialogBox(
+                                      heading: "Cancel Order",
+                                      title:
+                                          "Are you sure you want to cancel Order ?",
+                                      descriptions: "",
+                                      btn1Text: "Yes",
+                                      btn2Text: "Cancel",
+                                      icon: const Icon(Icons.clear),
+                                      onClicked: () {
+                                        orderProvider.cancelOrder(id, context);
+                                        Navigator.pop(context);
+                                      });
+                                });
+                          },
+                          child: AppButton(
+                              sizes: 30.sp,
+                              height: 70.h,
+                              width: 220.w,
+                              text: 'Cancel Order'),
+                        ),
                       ],
                     ),
                   ),

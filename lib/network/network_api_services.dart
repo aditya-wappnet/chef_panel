@@ -70,6 +70,27 @@ class NetworkApiService extends BaseApiServices {
     }
   }
 
+  @override
+  Future getDeleteApiResponse(String url) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+
+      var headers = {
+        'Accept': 'application/json',
+        'Authorization': 'Token $token'
+      };
+      print(url);
+      final response = await http
+          .delete(Uri.parse(url), headers: headers)
+          .timeout(const Duration(seconds: 10));
+      print(response.statusCode);
+      return response;
+    } on SocketException {
+      throw FetchDataExceptions('No Internet Connection');
+    }
+  }
+
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:

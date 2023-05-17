@@ -28,4 +28,15 @@ class OrderRepository {
       rethrow;
     }
   }
+
+  Future<dynamic> cancelOrder(dynamic param) async {
+    try {
+      dynamic response = await _apiServices.getDeleteApiResponse(
+          '${ApiEndPoint.baseUrl}${ApiEndPoint.orders.cancelOrder}$param/');
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

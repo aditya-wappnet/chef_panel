@@ -4,15 +4,12 @@ import 'package:chef_panel/helper/fonts/font_family.dart';
 import 'package:chef_panel/widgets/custom_dailog.dart';
 import 'package:chef_panel/widgets/shimmer_effect_notification.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../provider/get_all_order.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   static List getDummyList() {
-    List list = List.generate(0, (i) {
+    List list = List.generate(5, (i) {
       return "Item ${i + 1}";
     });
     return list;

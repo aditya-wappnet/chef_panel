@@ -6,6 +6,8 @@ class ApiEndPoint {
   static _AuthEndPoint authEndPoint = _AuthEndPoint();
 
   static _Orders orders = _Orders();
+
+  static _Notification notification = _Notification();
 }
 
 class _AuthEndPoint {
@@ -16,4 +18,12 @@ class _Orders {
   final String getOrders = "chef/all_orders/";
 
   final String updateOrderStatus = "chef/order/update/";
+
+  final String cancelOrder = "chef/order/delete/";
+}
+
+class _Notification {
+  final String getNotifications = "notifications/";
+
+  final String deleteNotifications = "notifications/";
 }
