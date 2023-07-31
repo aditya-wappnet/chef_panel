@@ -1,23 +1,18 @@
-// ignore_for_file: use_build_context_synchronously, unused_field, prefer_final_fields, avoid_print
+import 'dart:developer';
 
-import 'package:chef_panel/helper/colors/custom_colors.dart';
 import 'package:chef_panel/repository/auth_repository.dart';
 import 'package:chef_panel/routes/routes_const.dart';
-import 'package:chef_panel/widgets/custom_dailog.dart';
-import 'package:flutter/foundation.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../network/db_provider.dart';
+import '../widgets/custom_flush_bar_widget.dart';
 
 class LoginInProvider with ChangeNotifier {
   TextEditingController signemailController = TextEditingController();
   TextEditingController signpassController = TextEditingController();
 
-  void onInit() {
-    signemailController.text = "chef@gmail.com";
-    signpassController.text = "admin@123";
-  }
-
-  final _myRepo = AuthRepository();
+  final AuthRepository _authRepository = AuthRepository();
 
   bool _loading = false;
   bool get loading => _loading;
@@ -27,75 +22,45 @@ class LoginInProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loginApi(dynamic data, BuildContext context) async {
-    print(data);
+  loginApi(String email, String password, BuildContext context) async {
     setLoading(true);
-    _myRepo.loginApi(data).then((value) async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? fcmToken = await messaging.getToken();
+    var data = {"email": email, "password": password, "fcmToken": fcmToken};
+    log(data.toString());
+    _authRepository.loginApi(data).then((response) {
+      log("response : " + response.toString());
+      if (response != null) {
+        if (response.statusCode == 200) {
+          setLoading(false);
+          String token = response.data['data']['token'];
+          DatabaseProvider().saveToken(token);
+          Navigator.popAndPushNamed(context, RoutesName.bottomBar);
+          clearText();
+          signemailController.clear();
+          notifyListeners();
+        } else if (response.data['status'] == "False") {
+          CustomFlushbar.showError(context, response.data['message'],
+              onDismissed: () {});
+          setLoading(false);
+        }
+      } else {
+        // CustomFlushbar.showError(
+        //     context,
+        //     AppLocalizations.of(context)
+        //         .translate('error_occurred_error_message'),
+        //     onDismissed: () {});
+        setLoading(false);
+      }
+    }).catchError((error) {
+      // handleDioException(context, error);
       setLoading(false);
-      if (kDebugMode) {
-        print(value.toString());
-        print(value['status']);
-      }
-
-      if (value['status'] == true) {
-        String token = value['data']['token'];
-        print(token);
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', token);
-        showDialog(
-            barrierDismissible: true,
-            barrierLabel: '',
-            barrierColor: Colors.black38,
-            builder: (BuildContext context) {
-              return const CustomDialogBox(
-                heading: "Success",
-                icon: Icon(Icons.done),
-                backgroundColor: AccentColor.lightGreenColor,
-                title: "Login Successfull",
-                descriptions: "", //
-                btn1Text: "",
-                btn2Text: "",
-              );
-            },
-            context: context);
-        await Future.delayed(const Duration(milliseconds: 2000)).then((value) =>
-            Navigator.popAndPushNamed(context, RoutesName.bottomBar));
-        clearText();
-        signemailController.clear();
-      } else if (value['status'] == false) {
-        showDialog(
-            barrierDismissible: true,
-            barrierLabel: '',
-            barrierColor: Colors.black38,
-            context: context,
-            builder: (BuildContext context) {
-              return CustomDialogBox(
-                heading: "Verification",
-                icon: const Icon(Icons.not_listed_location),
-                backgroundColor: SematicColor.redColor,
-                title: value['message']['errors'][0].toString(),
-                descriptions: "", //
-                btn1Text: "",
-                btn2Text: "",
-              );
-            });
-        await Future.delayed(const Duration(seconds: 3))
-            .then((value) => Navigator.of(context).pop());
-        clearText();
-      }
-    }).onError((error, stackTrace) async {
-      setLoading(false);
-      clearText();
-      if (kDebugMode) {
-        print(error.toString());
-      }
     });
   }
 
   //Function to Remove token got during logout
   Future<void> logout(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove('token');
+    DatabaseProvider().clear();
     Navigator.pushNamedAndRemoveUntil(
       context,
       RoutesName.siginView,
@@ -105,9 +70,8 @@ class LoginInProvider with ChangeNotifier {
 
   //Function to Store token got during login
   static Future<bool> checkUserLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
-    if (token == null || token.isEmpty) {
+    String? token = await DatabaseProvider().getToken();
+    if (token.isEmpty) {
       return false;
     }
 

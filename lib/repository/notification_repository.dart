@@ -3,9 +3,9 @@ import '../network/network_api_services.dart';
 import '../services/api_end_points.dart';
 
 class NotificationRepository {
-  BaseApiServices _apiServices = NetworkApiService();
+  final BaseApiService _apiServices = NetworkApiService();
 
-  Future<dynamic> getNotification() async {
+  getNotification({int? page}) async {
     try {
       dynamic response = await _apiServices.getGetApiResponse(
           ApiEndPoint.baseUrl + ApiEndPoint.notification.getNotifications);
@@ -16,12 +16,21 @@ class NotificationRepository {
     }
   }
 
-  Future<dynamic> deleteNotification(
-    dynamic param,
-  ) async {
+  deleteSingleNotification(int id) async {
     try {
       dynamic response = await _apiServices.getDeleteApiResponse(
-          '${ApiEndPoint.baseUrl}${ApiEndPoint.notification.deleteNotifications}$param/');
+          '${ApiEndPoint.baseUrl}${ApiEndPoint.notification.deleteNotifications}$id/');
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  deleteAllNotification() async {
+    try {
+      dynamic response = await _apiServices.getDeleteApiResponse(
+          '${ApiEndPoint.baseUrl}${ApiEndPoint.notification.deleteNotifications}');
 
       return response;
     } catch (e) {

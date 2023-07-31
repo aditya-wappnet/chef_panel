@@ -20,9 +20,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
-    final provider = Provider.of<LoginInProvider>(context, listen: false);
-    provider.onInit();
-
     super.initState();
   }
 
@@ -154,16 +151,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                           onTap: () {
                                             if (logininFormKey.currentState!
                                                 .validate()) {
-                                              Map data = {
-                                                'email': provider
-                                                    .signemailController.text
-                                                    .toString(),
-                                                'password': provider
-                                                    .signpassController.text
-                                                    .toString(),
-                                              };
-                                              provider.loginApi(data, context);
-                                            }
+                                              provider.loginApi(
+                                                  provider
+                                                      .signemailController.text
+                                                      .toString(),
+                                                  provider
+                                                      .signpassController.text
+                                                      .toString(),
+                                                  context);
+                                            } else {}
                                           },
                                           child: provider.loading == true
                                               ? Center(

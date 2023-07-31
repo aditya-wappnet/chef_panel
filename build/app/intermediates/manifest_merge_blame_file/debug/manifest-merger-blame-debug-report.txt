@@ -13,216 +13,368 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->/home/wappnet-56/Documents/projects/chef_panel/android/app/src/debug/AndroidManifest.xml:7:5-66
-15-->/home/wappnet-56/Documents/projects/chef_panel/android/app/src/debug/AndroidManifest.xml:7:22-64
-16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-16-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:26:5-79
-16-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:26:22-76
-17
-18    <application
-19        android:name="android.app.Application"
-20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-20-->[androidx.core:core:1.6.0] /home/wappnet-56/.gradle/caches/transforms-3/ae42e6c01585f28a5adeac7499fca147/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
-21        android:debuggable="true"
-22        android:icon="@mipmap/ic_launcher"
-23        android:label="chef_panel" >
-24        <activity
-25            android:name="com.example.chef_panel.MainActivity"
-26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-27            android:exported="true"
-28            android:hardwareAccelerated="true"
-29            android:launchMode="singleTop"
-30            android:theme="@style/LaunchTheme"
-31            android:windowSoftInputMode="adjustResize" >
-32
-33            <!--
-34                 Specifies an Android theme to apply to this Activity as soon as
-35                 the Android process has started. This theme is visible to the user
-36                 while the Flutter UI initializes. After that, this theme continues
-37                 to determine the Window background behind the Flutter UI.
-38            -->
-39            <meta-data
-40                android:name="io.flutter.embedding.android.NormalTheme"
-41                android:resource="@style/NormalTheme" />
-42
-43            <intent-filter>
-44                <action android:name="android.intent.action.MAIN" />
+15-->/home/wappnet-58/StudioProjects/chef_panel/android/app/src/debug/AndroidManifest.xml:7:5-66
+15-->/home/wappnet-58/StudioProjects/chef_panel/android/app/src/debug/AndroidManifest.xml:7:22-64
+16    <uses-permission android:name="android.permission.WAKE_LOCK" />
+16-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-68
+16-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-65
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissions options for the `notification` group -->
+17-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-79
+17-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-76
+18    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+18-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-77
+18-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:13:22-74
+19    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+19-->[com.google.firebase:firebase-iid:21.1.0] /home/wappnet-58/.gradle/caches/transforms-3/2c87c4629024f4709268730fb7d0bc63/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+19-->[com.google.firebase:firebase-iid:21.1.0] /home/wappnet-58/.gradle/caches/transforms-3/2c87c4629024f4709268730fb7d0bc63/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:22-79
+20
+21    <application
+22        android:name="android.app.Application"
+23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+23-->[androidx.core:core:1.6.0] /home/wappnet-58/.gradle/caches/transforms-3/ae42e6c01585f28a5adeac7499fca147/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+24        android:debuggable="true"
+25        android:icon="@mipmap/ic_launcher"
+26        android:label="chef_panel" >
+27        <activity
+28            android:name="com.example.chef_panel.MainActivity"
+29            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+30            android:exported="true"
+31            android:hardwareAccelerated="true"
+32            android:launchMode="singleTop"
+33            android:theme="@style/LaunchTheme"
+34            android:windowSoftInputMode="adjustResize" >
+35
+36            <!--
+37                 Specifies an Android theme to apply to this Activity as soon as
+38                 the Android process has started. This theme is visible to the user
+39                 while the Flutter UI initializes. After that, this theme continues
+40                 to determine the Window background behind the Flutter UI.
+41            -->
+42            <meta-data
+43                android:name="io.flutter.embedding.android.NormalTheme"
+44                android:resource="@style/NormalTheme" />
 45
-46                <category android:name="android.intent.category.LAUNCHER" />
-47            </intent-filter>
-48        </activity>
-49        <!--
-50             Don't delete the meta-data below.
-51             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-52        -->
-53        <meta-data
-54            android:name="flutterEmbedding"
-55            android:value="2" />
-56
-57        <service
-57-->[:firebase_auth] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-58            android:name="com.google.firebase.components.ComponentDiscoveryService"
-58-->[:firebase_auth] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
-59            android:directBootAware="true"
-59-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:34:13-43
-60            android:exported="false" >
-60-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:68:13-37
-61            <meta-data
-61-->[:firebase_auth] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
-62                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-62-->[:firebase_auth] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
-63                android:value="com.google.firebase.components.ComponentRegistrar" />
-63-->[:firebase_auth] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+46            <intent-filter>
+47                <action android:name="android.intent.action.MAIN" />
+48
+49                <category android:name="android.intent.category.LAUNCHER" />
+50            </intent-filter>
+51        </activity>
+52        <!--
+53             Don't delete the meta-data below.
+54             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+55        -->
+56        <meta-data
+57            android:name="flutterEmbedding"
+58            android:value="2" />
+59
+60        <service
+60-->[:firebase_auth] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+61            android:name="com.google.firebase.components.ComponentDiscoveryService"
+61-->[:firebase_auth] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+62            android:directBootAware="true"
+62-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:34:13-43
+63            android:exported="false" >
+63-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:68:13-37
 64            <meta-data
-64-->[:firebase_storage] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
-65                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-65-->[:firebase_storage] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
+64-->[:firebase_auth] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+65                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+65-->[:firebase_auth] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 66                android:value="com.google.firebase.components.ComponentRegistrar" />
-66-->[:firebase_storage] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+66-->[:firebase_auth] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 67            <meta-data
-67-->[:cloud_firestore] /home/wappnet-56/Documents/projects/chef_panel/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
-68                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-68-->[:cloud_firestore] /home/wappnet-56/Documents/projects/chef_panel/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
+67-->[:firebase_storage] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+68                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
+68-->[:firebase_storage] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
 69                android:value="com.google.firebase.components.ComponentRegistrar" />
-69-->[:cloud_firestore] /home/wappnet-56/Documents/projects/chef_panel/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+69-->[:firebase_storage] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 70            <meta-data
-70-->[:firebase_core] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
-71                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-71-->[:firebase_core] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+70-->[:cloud_firestore] /home/wappnet-58/StudioProjects/chef_panel/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+71                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+71-->[:cloud_firestore] /home/wappnet-58/StudioProjects/chef_panel/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
 72                android:value="com.google.firebase.components.ComponentRegistrar" />
-72-->[:firebase_core] /home/wappnet-56/Documents/projects/chef_panel/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+72-->[:cloud_firestore] /home/wappnet-58/StudioProjects/chef_panel/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 73            <meta-data
-73-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:69:13-71:85
-74                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-74-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:70:17-109
+73-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-40:85
+74                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+74-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:39:17-128
 75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:71:17-82
+75-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:40:17-82
 76            <meta-data
-76-->[com.google.firebase:firebase-firestore:24.5.0] /home/wappnet-56/.gradle/caches/transforms-3/79de29499a778905000c8fd3bcf80a9a/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:19:13-21:85
-77                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-77-->[com.google.firebase:firebase-firestore:24.5.0] /home/wappnet-56/.gradle/caches/transforms-3/79de29499a778905000c8fd3bcf80a9a/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:20:17-111
+76-->[:firebase_core] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+77                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+77-->[:firebase_core] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 78                android:value="com.google.firebase.components.ComponentRegistrar" />
-78-->[com.google.firebase:firebase-firestore:24.5.0] /home/wappnet-56/.gradle/caches/transforms-3/79de29499a778905000c8fd3bcf80a9a/transformed/jetified-firebase-firestore-24.5.0/AndroidManifest.xml:21:17-82
+78-->[:firebase_core] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 79            <meta-data
-79-->[com.google.firebase:firebase-storage:20.1.0] /home/wappnet-56/.gradle/caches/transforms-3/bd056470c650fc1d6acbae32adf9ed80/transformed/jetified-firebase-storage-20.1.0/AndroidManifest.xml:32:13-34:85
-80                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-80-->[com.google.firebase:firebase-storage:20.1.0] /home/wappnet-56/.gradle/caches/transforms-3/bd056470c650fc1d6acbae32adf9ed80/transformed/jetified-firebase-storage-20.1.0/AndroidManifest.xml:33:17-107
+79-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:69:13-71:85
+80                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+80-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:70:17-109
 81                android:value="com.google.firebase.components.ComponentRegistrar" />
-81-->[com.google.firebase:firebase-storage:20.1.0] /home/wappnet-56/.gradle/caches/transforms-3/bd056470c650fc1d6acbae32adf9ed80/transformed/jetified-firebase-storage-20.1.0/AndroidManifest.xml:34:17-82
-82        </service>
-83
-84        <uses-library
-84-->[androidx.window:window:1.0.0-beta04] /home/wappnet-56/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-85            android:name="androidx.window.extensions"
-85-->[androidx.window:window:1.0.0-beta04] /home/wappnet-56/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-86            android:required="false" />
-86-->[androidx.window:window:1.0.0-beta04] /home/wappnet-56/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-87        <uses-library
-87-->[androidx.window:window:1.0.0-beta04] /home/wappnet-56/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-88            android:name="androidx.window.sidecar"
-88-->[androidx.window:window:1.0.0-beta04] /home/wappnet-56/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-89            android:required="false" />
-89-->[androidx.window:window:1.0.0-beta04] /home/wappnet-56/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-90
-91        <activity
-91-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:29:9-46:20
-92            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-92-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:30:13-80
-93            android:excludeFromRecents="true"
-93-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:31:13-46
-94            android:exported="true"
-94-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:32:13-36
-95            android:launchMode="singleTask"
-95-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:33:13-44
-96            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-96-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:34:13-72
-97            <intent-filter>
-97-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:35:13-45:29
-98                <action android:name="android.intent.action.VIEW" />
-98-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:36:17-69
-98-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:36:25-66
-99
-100                <category android:name="android.intent.category.DEFAULT" />
-100-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:38:17-76
-100-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:38:27-73
-101                <category android:name="android.intent.category.BROWSABLE" />
-101-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:39:17-78
-101-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:39:27-75
-102
-103                <data
-103-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:41:17-44:51
-104                    android:host="firebase.auth"
-104-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:42:21-49
-105                    android:path="/"
-105-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:43:21-37
-106                    android:scheme="genericidp" />
-106-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:44:21-48
-107            </intent-filter>
-108        </activity>
-109        <activity
-109-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:47:9-64:20
-110            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-110-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:48:13-79
-111            android:excludeFromRecents="true"
-111-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:49:13-46
-112            android:exported="true"
-112-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:50:13-36
-113            android:launchMode="singleTask"
-113-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:51:13-44
-114            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-114-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:52:13-72
-115            <intent-filter>
-115-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:53:13-63:29
-116                <action android:name="android.intent.action.VIEW" />
-116-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:36:17-69
-116-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:36:25-66
-117
-118                <category android:name="android.intent.category.DEFAULT" />
-118-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:38:17-76
-118-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:38:27-73
-119                <category android:name="android.intent.category.BROWSABLE" />
-119-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:39:17-78
-119-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:39:27-75
-120
-121                <data
-121-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:41:17-44:51
-122                    android:host="firebase.auth"
-122-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:42:21-49
-123                    android:path="/"
-123-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:43:21-37
-124                    android:scheme="recaptcha" />
-124-->[com.google.firebase:firebase-auth:21.3.0] /home/wappnet-56/.gradle/caches/transforms-3/d6bac26d288ac0b6ab8036f5aeabea4b/transformed/jetified-firebase-auth-21.3.0/AndroidManifest.xml:44:21-48
-125            </intent-filter>
-126        </activity>
+81-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:71:17-82
+82            <meta-data
+82-->[com.google.firebase:firebase-iid:21.1.0] /home/wappnet-58/.gradle/caches/transforms-3/2c87c4629024f4709268730fb7d0bc63/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+83                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+83-->[com.google.firebase:firebase-iid:21.1.0] /home/wappnet-58/.gradle/caches/transforms-3/2c87c4629024f4709268730fb7d0bc63/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+84                android:value="com.google.firebase.components.ComponentRegistrar" />
+84-->[com.google.firebase:firebase-iid:21.1.0] /home/wappnet-58/.gradle/caches/transforms-3/2c87c4629024f4709268730fb7d0bc63/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+85            <meta-data
+85-->[com.google.firebase:firebase-firestore:24.7.0] /home/wappnet-58/.gradle/caches/transforms-3/74efa1ca2c4693e57c933a082f7d16e6/transformed/jetified-firebase-firestore-24.7.0/AndroidManifest.xml:19:13-21:85
+86                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+86-->[com.google.firebase:firebase-firestore:24.7.0] /home/wappnet-58/.gradle/caches/transforms-3/74efa1ca2c4693e57c933a082f7d16e6/transformed/jetified-firebase-firestore-24.7.0/AndroidManifest.xml:20:17-111
+87                android:value="com.google.firebase.components.ComponentRegistrar" />
+87-->[com.google.firebase:firebase-firestore:24.7.0] /home/wappnet-58/.gradle/caches/transforms-3/74efa1ca2c4693e57c933a082f7d16e6/transformed/jetified-firebase-firestore-24.7.0/AndroidManifest.xml:21:17-82
+88            <meta-data
+88-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:55:13-57:85
+89                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+89-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:56:17-119
+90                android:value="com.google.firebase.components.ComponentRegistrar" />
+90-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:57:17-82
+91            <meta-data
+91-->[com.google.firebase:firebase-storage:20.2.1] /home/wappnet-58/.gradle/caches/transforms-3/debabf2aba1fc681e779f0071fb78fa9/transformed/jetified-firebase-storage-20.2.1/AndroidManifest.xml:32:13-34:85
+92                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+92-->[com.google.firebase:firebase-storage:20.2.1] /home/wappnet-58/.gradle/caches/transforms-3/debabf2aba1fc681e779f0071fb78fa9/transformed/jetified-firebase-storage-20.2.1/AndroidManifest.xml:33:17-107
+93                android:value="com.google.firebase.components.ComponentRegistrar" />
+93-->[com.google.firebase:firebase-storage:20.2.1] /home/wappnet-58/.gradle/caches/transforms-3/debabf2aba1fc681e779f0071fb78fa9/transformed/jetified-firebase-storage-20.2.1/AndroidManifest.xml:34:17-82
+94            <meta-data
+94-->[com.google.firebase:firebase-installations:17.1.3] /home/wappnet-58/.gradle/caches/transforms-3/716dcdd69e4630c9d20bc2f93eef7d9e/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:17:13-19:85
+95                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+95-->[com.google.firebase:firebase-installations:17.1.3] /home/wappnet-58/.gradle/caches/transforms-3/716dcdd69e4630c9d20bc2f93eef7d9e/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:18:17-127
+96                android:value="com.google.firebase.components.ComponentRegistrar" />
+96-->[com.google.firebase:firebase-installations:17.1.3] /home/wappnet-58/.gradle/caches/transforms-3/716dcdd69e4630c9d20bc2f93eef7d9e/transformed/jetified-firebase-installations-17.1.3/AndroidManifest.xml:19:17-82
+97            <meta-data
+97-->[com.google.firebase:firebase-datatransport:18.1.7] /home/wappnet-58/.gradle/caches/transforms-3/6fe34c4caf8ad9c923bedeee155bcee3/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+98                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+98-->[com.google.firebase:firebase-datatransport:18.1.7] /home/wappnet-58/.gradle/caches/transforms-3/6fe34c4caf8ad9c923bedeee155bcee3/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+99                android:value="com.google.firebase.components.ComponentRegistrar" />
+99-->[com.google.firebase:firebase-datatransport:18.1.7] /home/wappnet-58/.gradle/caches/transforms-3/6fe34c4caf8ad9c923bedeee155bcee3/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+100        </service>
+101        <service
+101-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-19:72
+102            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+102-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-107
+103            android:exported="false"
+103-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+104            android:permission="android.permission.BIND_JOB_SERVICE" />
+104-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-69
+105        <service
+105-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-26:19
+106            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+106-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-97
+107            android:exported="false" >
+107-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-37
+108            <intent-filter>
+108-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+109                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+109-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+109-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+110            </intent-filter>
+111        </service>
+112
+113        <receiver
+113-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-35:20
+114            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+114-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-98
+115            android:exported="true"
+115-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-36
+116            android:permission="com.google.android.c2dm.permission.SEND" >
+116-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-73
+117            <intent-filter>
+117-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-34:29
+118                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+118-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:17-81
+118-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:25-78
+119            </intent-filter>
+120        </receiver>
+121
+122        <provider
+122-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:43:9-47:38
+123            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+123-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:44:13-102
+124            android:authorities="com.example.chef_panel.flutterfirebasemessaginginitprovider"
+124-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:45:13-88
+125            android:exported="false"
+125-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:46:13-37
+126            android:initOrder="99" />
+126-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:47:13-35
 127
-128        <provider
-128-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:25:9-30:39
-129            android:name="com.google.firebase.provider.FirebaseInitProvider"
-129-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:26:13-77
-130            android:authorities="com.example.chef_panel.firebaseinitprovider"
-130-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:27:13-72
-131            android:directBootAware="true"
-131-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:28:13-43
-132            android:exported="false"
-132-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:29:13-37
-133            android:initOrder="100" />
-133-->[com.google.firebase:firebase-common:20.3.2] /home/wappnet-56/.gradle/caches/transforms-3/7c67cb1107658111bdfb744d9b4eec58/transformed/jetified-firebase-common-20.3.2/AndroidManifest.xml:30:13-36
+128        <uses-library
+128-->[androidx.window:window:1.0.0-beta04] /home/wappnet-58/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+129            android:name="androidx.window.extensions"
+129-->[androidx.window:window:1.0.0-beta04] /home/wappnet-58/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+130            android:required="false" />
+130-->[androidx.window:window:1.0.0-beta04] /home/wappnet-58/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+131        <uses-library
+131-->[androidx.window:window:1.0.0-beta04] /home/wappnet-58/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+132            android:name="androidx.window.sidecar"
+132-->[androidx.window:window:1.0.0-beta04] /home/wappnet-58/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+133            android:required="false" />
+133-->[androidx.window:window:1.0.0-beta04] /home/wappnet-58/.gradle/caches/transforms-3/fa8aad42c825af1f34f93ab9a34c8ecb/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 134
 135        <activity
-135-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-56/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-136            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-136-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-56/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-137            android:exported="false"
-137-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-56/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-138            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-138-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-56/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-139
-140        <meta-data
-140-->[com.google.android.gms:play-services-basement:18.1.0] /home/wappnet-56/.gradle/caches/transforms-3/b98038a8bb5f558b05cc7fc73ca7ad87/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
-141            android:name="com.google.android.gms.version"
-141-->[com.google.android.gms:play-services-basement:18.1.0] /home/wappnet-56/.gradle/caches/transforms-3/b98038a8bb5f558b05cc7fc73ca7ad87/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
-142            android:value="@integer/google_play_services_version" />
-142-->[com.google.android.gms:play-services-basement:18.1.0] /home/wappnet-56/.gradle/caches/transforms-3/b98038a8bb5f558b05cc7fc73ca7ad87/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
-143    </application>
-144
-145</manifest>
+135-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:29:9-46:20
+136            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+136-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:30:13-80
+137            android:excludeFromRecents="true"
+137-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:31:13-46
+138            android:exported="true"
+138-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:32:13-36
+139            android:launchMode="singleTask"
+139-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:33:13-44
+140            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+140-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:34:13-72
+141            <intent-filter>
+141-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:35:13-45:29
+142                <action android:name="android.intent.action.VIEW" />
+142-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:36:17-69
+142-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:36:25-66
+143
+144                <category android:name="android.intent.category.DEFAULT" />
+144-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:17-76
+144-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:27-73
+145                <category android:name="android.intent.category.BROWSABLE" />
+145-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:17-78
+145-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:27-75
+146
+147                <data
+147-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:41:17-44:51
+148                    android:host="firebase.auth"
+148-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:42:21-49
+149                    android:path="/"
+149-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:43:21-37
+150                    android:scheme="genericidp" />
+150-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:44:21-48
+151            </intent-filter>
+152        </activity>
+153        <activity
+153-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:47:9-64:20
+154            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+154-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:48:13-79
+155            android:excludeFromRecents="true"
+155-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:49:13-46
+156            android:exported="true"
+156-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:50:13-36
+157            android:launchMode="singleTask"
+157-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:51:13-44
+158            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+158-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:52:13-72
+159            <intent-filter>
+159-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:53:13-63:29
+160                <action android:name="android.intent.action.VIEW" />
+160-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:36:17-69
+160-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:36:25-66
+161
+162                <category android:name="android.intent.category.DEFAULT" />
+162-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:17-76
+162-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:27-73
+163                <category android:name="android.intent.category.BROWSABLE" />
+163-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:17-78
+163-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:27-75
+164
+165                <data
+165-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:41:17-44:51
+166                    android:host="firebase.auth"
+166-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:42:21-49
+167                    android:path="/"
+167-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:43:21-37
+168                    android:scheme="recaptcha" />
+168-->[com.google.firebase:firebase-auth:22.1.0] /home/wappnet-58/.gradle/caches/transforms-3/5b287222d5d5b2ff00a50034b066c023/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:44:21-48
+169            </intent-filter>
+170        </activity>
+171
+172        <receiver
+172-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:31:9-38:20
+173            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+173-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:32:13-78
+174            android:exported="true"
+174-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:33:13-36
+175            android:permission="com.google.android.c2dm.permission.SEND" >
+175-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:34:13-73
+176            <intent-filter>
+176-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-34:29
+177                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+177-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:17-81
+177-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:33:25-78
+178            </intent-filter>
+179        </receiver>
+180        <!--
+181             FirebaseMessagingService performs security checks at runtime,
+182             but set to not exported to explicitly avoid allowing another app to call it.
+183        -->
+184        <service
+184-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:44:9-51:19
+185            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+185-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:45:13-82
+186            android:directBootAware="true"
+186-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:46:13-43
+187            android:exported="false" >
+187-->[com.google.firebase:firebase-messaging:23.2.0] /home/wappnet-58/.gradle/caches/transforms-3/fd054c393626171e0a99ab79f11a1122/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:47:13-37
+188            <intent-filter android:priority="-500" >
+188-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:29
+189                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+189-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-78
+189-->[:firebase_messaging] /home/wappnet-58/StudioProjects/chef_panel/build/firebase_messaging/intermediates/merged_manifest/debug/AndroidManifest.xml:24:25-75
+190            </intent-filter>
+191        </service>
+192
+193        <provider
+193-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:25:9-30:39
+194            android:name="com.google.firebase.provider.FirebaseInitProvider"
+194-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:26:13-77
+195            android:authorities="com.example.chef_panel.firebaseinitprovider"
+195-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:27:13-72
+196            android:directBootAware="true"
+196-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:28:13-43
+197            android:exported="false"
+197-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:29:13-37
+198            android:initOrder="100" />
+198-->[com.google.firebase:firebase-common:20.3.3] /home/wappnet-58/.gradle/caches/transforms-3/9ad14aa1e6d50d814edf3dedd33f8508/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:30:13-36
+199
+200        <activity
+200-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-58/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+201            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+201-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-58/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+202            android:exported="false"
+202-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-58/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+203            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+203-->[com.google.android.gms:play-services-base:18.0.1] /home/wappnet-58/.gradle/caches/transforms-3/c7232b6ce4e188bed1222fb6e790465b/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+204
+205        <meta-data
+205-->[com.google.android.gms:play-services-basement:18.1.0] /home/wappnet-58/.gradle/caches/transforms-3/b98038a8bb5f558b05cc7fc73ca7ad87/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+206            android:name="com.google.android.gms.version"
+206-->[com.google.android.gms:play-services-basement:18.1.0] /home/wappnet-58/.gradle/caches/transforms-3/b98038a8bb5f558b05cc7fc73ca7ad87/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+207            android:value="@integer/google_play_services_version" />
+207-->[com.google.android.gms:play-services-basement:18.1.0] /home/wappnet-58/.gradle/caches/transforms-3/b98038a8bb5f558b05cc7fc73ca7ad87/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+208
+209        <service
+209-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/90a1264473ea7c3437b7d59add9eca5c/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+210            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+210-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/90a1264473ea7c3437b7d59add9eca5c/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+211            android:exported="false" >
+211-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/90a1264473ea7c3437b7d59add9eca5c/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+212            <meta-data
+212-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/90a1264473ea7c3437b7d59add9eca5c/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+213                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+213-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/90a1264473ea7c3437b7d59add9eca5c/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+214                android:value="cct" />
+214-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/90a1264473ea7c3437b7d59add9eca5c/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+215        </service>
+216        <service
+216-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+217            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+217-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+218            android:exported="false"
+218-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+219            android:permission="android.permission.BIND_JOB_SERVICE" >
+219-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+220        </service>
+221
+222        <receiver
+222-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+223            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+223-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+224            android:exported="false" />
+224-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/wappnet-58/.gradle/caches/transforms-3/b98e1a1618e0731e67b774290b6af269/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+225    </application>
+226
+227</manifest>

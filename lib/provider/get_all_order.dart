@@ -1,97 +1,102 @@
-// ignore_for_file: unused_field, prefer_collection_literals, avoid_print, use_build_context_synchronously
+import 'dart:developer';
 
 import 'package:chef_panel/models/order_model.dart';
 import 'package:chef_panel/repository/get_orders_repository.dart';
 import 'package:chef_panel/routes/routes_const.dart';
 import 'package:flutter/material.dart';
 
-class GetOrders with ChangeNotifier {
-  final _myRepo = OrderRepository();
+import '../helper/helpers.dart';
+import '../widgets/custom_flush_bar_widget.dart';
 
+class OrderProvider with ChangeNotifier {
+  final OrderRepository _orderRepository = OrderRepository();
 //store  order data from api fetch
-  List<Data> orderList = [];
+  List<OrderData> orderList = [];
 
-  Set<int> addedIds = {};
-
-  bool ispreparing = false;
-  bool get isPreparing => ispreparing;
+  bool _loading = false;
+  bool get loading => _loading;
 
   setLoading(bool value) {
-    ispreparing = value;
+    _loading = value;
     notifyListeners();
   }
 
-  Stream<List<Data>> orderStream() async* {
-    print('stream');
-    yield await getCustomerOrder(); // Yield the latest data fetched from the server
-  }
-
-  Future<List<Data>> getCustomerOrder() async {
-    var response = await _myRepo.getOrders();
-    try {
+  // get all customer orders
+  getOrders(BuildContext context) {
+    _orderRepository.getOrders().then((response) async {
+      setLoading(true);
       if (response != null) {
-        if (response['status'] == true) {
-          var getOrder = Orders.fromJson(response);
-
-          if (getOrder.data!.isNotEmpty) {
-            var addedIds = Set<int>();
-
-            orderList.clear();
-            orderList.addAll(getOrder.data!);
-
-            for (var data in getOrder.data!) {
-              // Check if category already exists
-              if (!addedIds.contains(data.id)) {
-                // categoryList.add(GetCategory(data: [data]));
-                addedIds.add(data.id!); // Add categoryId to Set
-              }
-            }
-
-            print('###$orderList');
-            return orderList;
-          }
-        } else {}
+        if (response.data['status'] == true) {
+          setLoading(false);
+          var getOrders = OrdersModel.fromJson(response.data);
+          orderList = getOrders.orderData!;
+          notifyListeners();
+        } else {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
       }
-    } catch (e, stackTrace) {
-      print(e);
-      print('Stack trace: $stackTrace');
-    }
-    // Return an empty list if there was an error
-    return [];
+    }).catchError((error) {
+      setLoading(false);
+      log(error.toString());
+      // handleDioException(context, error);
+    });
   }
 
-  Future<void> updatePreparing(
-      dynamic param, String status, BuildContext context) async {
-    var response = await _myRepo.updateOrderStatus(param, status);
+  updatePreparing(dynamic param, String status, BuildContext context) async {
     setLoading(true);
-    try {
+    await _orderRepository.updateOrderStatus(param, status).then((response) {
       if (response != null) {
-        if (response.statusCode == 200) {
+        if (response.data['status'] == true) {
           setLoading(false);
           Navigator.popAndPushNamed(context, RoutesName.bottomBar);
-        } else {}
+        } else if (response.data['status'] == false) {
+          setLoading(false);
+          CustomFlushbar.showError(context, response.data['message'],
+              onDismissed: () {});
+        }
+      } else {
+        setLoading(false);
+        // CustomFlushbar.showError(
+        //     context,
+        //     AppLocalizations.of(context)
+        //         .translate('error_occurred_error_message'),
+        //     onDismissed: () {});
+        notifyListeners();
       }
-    } catch (e, stackTrace) {
-      print(e);
-      print('Stack trace: $stackTrace');
-    }
-    // Return an empty list if there was an error
+    }).catchError((error) {
+      log(error.toString());
+      setLoading(false);
+      // handleDioException(context, error);
+    });
   }
 
-  Future<void> cancelOrder(dynamic param, BuildContext context) async {
-    var response = await _myRepo.cancelOrder(param);
-    setLoading(true);
-    try {
+  cancelOrder(int id, BuildContext context) {
+    _orderRepository.cancelOrder(id).then((response) {
       if (response != null) {
-        if (response.statusCode == 200) {
-          setLoading(false);
-          Navigator.popAndPushNamed(context, RoutesName.bottomBar);
-        } else {}
+        if (response.data['status'] == true) {
+          orderList.removeWhere((item) => item.id == id);
+          getOrders(context);
+          CustomFlushbar.showSuccess(context, response.data['message'],
+              onDismissed: () {});
+          notifyListeners();
+        } else if (response.data['status'] == false) {
+          CustomFlushbar.showError(context, response.data['message'],
+              onDismissed: () {});
+          notifyListeners();
+        }
+      } else {
+        // CustomFlushbar.showError(
+        //     context,
+        //     AppLocalizations.of(context)
+        //         .translate('error_occurred_error_message'),
+        //     onDismissed: () {});
+        notifyListeners();
       }
-    } catch (e, stackTrace) {
-      print(e);
-      print('Stack trace: $stackTrace');
-    }
-    // Return an empty list if there was an error
+    }).catchError((error) {
+      handleDioException(context, error);
+      notifyListeners();
+    });
   }
 }

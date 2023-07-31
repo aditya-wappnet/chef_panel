@@ -1,35 +1,33 @@
-// ignore_for_file: unnecessary_this, prefer_collection_literals
-
-class Orders {
+class OrdersModel {
   bool? status;
   String? message;
-  List<Data>? data;
+  List<OrderData>? orderData;
 
-  Orders({this.status, this.message, this.data});
+  OrdersModel({this.status, this.message, this.orderData});
 
-  Orders.fromJson(Map<String, dynamic> json) {
+  OrdersModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      orderData = <OrderData>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        orderData!.add(OrderData.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['message'] = message;
+    if (orderData != null) {
+      data['data'] = orderData!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Data {
+class OrderData {
   int? id;
   int? user;
   String? customerName;
@@ -39,8 +37,10 @@ class Data {
   String? paymentStatus;
   String? createdAt;
   String? totalPrice;
+  dynamic? remainingDuration;
+  String? orderInstructions;
 
-  Data(
+  OrderData(
       {this.id,
       this.user,
       this.customerName,
@@ -49,9 +49,11 @@ class Data {
       this.orderStatus,
       this.paymentStatus,
       this.createdAt,
-      this.totalPrice});
+      this.totalPrice,
+      this.remainingDuration,
+      this.orderInstructions});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  OrderData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'];
     customerName = json['customer_name'];
@@ -66,46 +68,62 @@ class Data {
     paymentStatus = json['payment_status'];
     createdAt = json['created_at'];
     totalPrice = json['total_price'];
+    remainingDuration = json['remaining_duration'];
+    orderInstructions = json['order_instructions'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user'] = this.user;
-    data['customer_name'] = this.customerName;
-    data['table_no'] = this.tableNo;
-    if (this.cartItems != null) {
-      data['cart_items'] = this.cartItems!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user'] = user;
+    data['customer_name'] = customerName;
+    data['table_no'] = tableNo;
+    if (cartItems != null) {
+      data['cart_items'] = cartItems!.map((v) => v.toJson()).toList();
     }
-    data['order_status'] = this.orderStatus;
-    data['payment_status'] = this.paymentStatus;
-    data['created_at'] = this.createdAt;
-    data['total_price'] = this.totalPrice;
+    data['order_status'] = orderStatus;
+    data['payment_status'] = paymentStatus;
+    data['created_at'] = createdAt;
+    data['total_price'] = totalPrice;
+    data['remaining_duration'] = remainingDuration;
+    data['order_instructions'] = orderInstructions;
     return data;
   }
 }
 
 class CartItems {
-  String? itemName;
-  dynamic itemPrice;
+  dynamic? total;
   int? quantity;
-  dynamic total;
+  String? itemName;
+  String? itemImage;
+  dynamic? itemPrice;
+  int? itemId;
 
-  CartItems({this.itemName, this.itemPrice, this.quantity, this.total});
+  CartItems(
+      {this.total,
+      this.quantity,
+      this.itemName,
+      this.itemImage,
+      this.itemPrice,
+      this.itemId});
 
   CartItems.fromJson(Map<String, dynamic> json) {
-    itemName = json['item_name'];
-    itemPrice = json['item_price'];
-    quantity = json['quantity'];
     total = json['total'];
+    quantity = json['quantity'];
+    itemName = json['item_name'];
+    itemImage = json['item_image'];
+    itemPrice = json['item_price'];
+    itemId = json['item_id'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['item_name'] = this.itemName;
-    data['item_price'] = this.itemPrice;
-    data['quantity'] = this.quantity;
-    data['total'] = this.total;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['quantity'] = quantity;
+    data['item_name'] = itemName;
+    data['item_image'] = itemImage;
+    data['item_price'] = itemPrice;
+    data['item_id'] = itemId;
     return data;
   }
 }
