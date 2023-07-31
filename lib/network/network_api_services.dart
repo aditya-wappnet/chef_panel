@@ -1,107 +1,226 @@
-import 'dart:convert';
-import 'dart:io';
+import 'dart:developer';
 
-import 'package:chef_panel/network/base_api_services.dart';
-import 'package:chef_panel/response/app_exception.dart';
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import '../helper/helpers.dart';
+import '../services/api_end_points.dart';
+import 'base_api_services.dart';
+import 'db_provider.dart';
 
-class NetworkApiService extends BaseApiServices {
-  @override
+class NetworkApiService extends BaseApiService {
+  static final Dio _dio = Dio(BaseOptions(
+      baseUrl: ApiEndPoint.baseUrl,
+      sendTimeout: const Duration(milliseconds: 30000),
+      receiveTimeout: const Duration(milliseconds: 60000),
+      connectTimeout: const Duration(milliseconds: 30000),
+      followRedirects: false,
+      validateStatus: (status) {
+        log("@@status : $status");
+        return status! < 500;
+      }));
+
+  setupInterceptors() {
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          return handler.next(options);
+        },
+        onResponse: (response, handler) {
+          if (response.statusCode == 401) {
+            RequestOptions originalRequest = response.requestOptions;
+            // Throw an error to trigger the onError callback
+            throw DioException(
+              requestOptions: originalRequest,
+              response: response,
+              error: 'Unauthorized',
+              type: DioExceptionType.badResponse,
+            );
+          }
+          // Add your custom logic here for response interception
+          return handler.next(response);
+        },
+        onError: (DioException error, handler) async {
+          BuildContext? context = AppContext.navigatorKey.currentContext;
+          if (error.response?.statusCode == 401) {
+            handleDioException(context!, error);
+          }
+          // Handle other errors if needed
+          return handler.next(error);
+        },
+      ),
+    );
+  }
+
   // to make HTTP requests to an API.
-  Future getGetApiResponse(String url) async {
-    dynamic responseJson;
+  @override
+  Future<Response> getGetApiResponse(String url) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('token');
+      final token = await DatabaseProvider().getToken();
 
       var headers = {
-        'Accept': 'application/json',
-        'Authorization': 'Token $token'
+        'Authorization': 'Token $token',
+        'Accept': 'application/json'
       };
 
-      final response = await http
-          .get(Uri.parse(url), headers: headers)
+      final response = await _dio
+          .get(url,
+              options: Options(
+                headers: headers,
+              ))
           .timeout(const Duration(seconds: 10));
-
-      responseJson = returnResponse(response);
-    } on SocketException {
-      throw FetchDataExceptions('No Internet Connection');
+      return response;
+    } catch (e) {
+      rethrow;
     }
-    return responseJson;
   }
 
   @override
+  Future<Response> getGetApiResponseWithParams(
+      String url, dynamic params) async {
+    try {
+      final token = await DatabaseProvider().getToken();
+      var headers = {
+        'Authorization': 'Token $token',
+        'Accept': 'application/json'
+      };
+      log("queryParams $params");
+      log("headers $headers");
+      final response = await _dio
+          .get(url,
+              options: Options(
+                headers: headers,
+              ),
+              queryParameters: params)
+          .timeout(const Duration(seconds: 10));
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // to make HTTP requests to an API.
-  Future getPostApiResponse(String url, dynamic data) async {
-    dynamic responseJson;
+  @override
+  Future<Response> getAuthApiResponse(String url, dynamic data,
+      {String? verifyToken}) async {
     try {
-      final response = await http
-          .post(Uri.parse(url), body: data)
+      var headers = {
+        'Authorization': 'Token $verifyToken',
+        'Accept': 'application/json'
+      };
+      var response = await _dio
+          .post(url,
+              data: data,
+              options: Options(
+                  headers: headers,
+                  validateStatus: (_) => true,
+                  contentType: Headers.jsonContentType,
+                  responseType: ResponseType.json))
           .timeout(const Duration(seconds: 10));
-
-      responseJson = returnResponse(response);
-    } on SocketException {
-      throw FetchDataExceptions('No Internet Connection');
+      return response;
+    } catch (e) {
+      rethrow;
     }
-    return responseJson;
+  }
+
+  // to make HTTP requests to an API.
+  @override
+  Future<Response> getPostApiResponse(String url, dynamic data) async {
+    try {
+      final token = await DatabaseProvider().getToken();
+      var headers = {
+        'Authorization': 'Token $token',
+        'Accept': 'application/json'
+      };
+
+      var response = await _dio
+          .post(url,
+              data: data,
+              options: Options(
+                  headers: headers,
+                  validateStatus: (_) => true,
+                  contentType: Headers.jsonContentType,
+                  responseType: ResponseType.json))
+          .timeout(const Duration(seconds: 10));
+      return response;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future getUpdateApiResponse(String url) async {
+  Future<Response> getPatchApiResponse(String url, dynamic data) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('token');
+      final token = await DatabaseProvider().getToken();
 
       var headers = {
-        'Accept': 'application/json',
-        'Authorization': 'Token $token'
+        'Authorization': 'Token $token',
+        'Accept': 'application/json'
       };
-      print(url);
-      final response = await http
-          .patch(Uri.parse(url), headers: headers)
+
+      var response = await _dio
+          .patch(url,
+              data: data,
+              options: Options(
+                headers: headers,
+                validateStatus: (_) => true,
+                contentType: Headers.jsonContentType,
+                responseType: ResponseType.json,
+              ))
           .timeout(const Duration(seconds: 10));
-      print(response.statusCode);
       return response;
-    } on SocketException {
-      throw FetchDataExceptions('No Internet Connection');
+    } catch (e) {
+      rethrow;
     }
   }
 
   @override
-  Future getDeleteApiResponse(String url) async {
+  Future<Response> getPutApiResponse(String url, dynamic data) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('token');
-
+      final token = await DatabaseProvider().getToken();
       var headers = {
-        'Accept': 'application/json',
-        'Authorization': 'Token $token'
+        'Authorization': 'Token $token',
+        'Accept': 'application/json'
       };
-      print(url);
-      final response = await http
-          .delete(Uri.parse(url), headers: headers)
+
+      var response = await _dio
+          .put(url,
+              data: data,
+              options: Options(
+                headers: headers,
+                validateStatus: (_) => true,
+                contentType: Headers.jsonContentType,
+                responseType: ResponseType.json,
+              ))
           .timeout(const Duration(seconds: 10));
-      print(response.statusCode);
+
       return response;
-    } on SocketException {
-      throw FetchDataExceptions('No Internet Connection');
+    } catch (e) {
+      rethrow;
     }
   }
 
-  dynamic returnResponse(http.Response response) {
-    switch (response.statusCode) {
-      case 200:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
-      case 400:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
-      default:
-        throw FetchDataExceptions(
-            'Error Occured While Communicating with Server');
+  @override
+  Future<Response> getDeleteApiResponse(String url) async {
+    try {
+      final token = await DatabaseProvider().getToken();
+
+      var headers = {
+        'Authorization': 'Token $token',
+        'Accept': 'application/json'
+      };
+
+      var response = await _dio
+          .delete(url,
+              options: Options(
+                  headers: headers,
+                  validateStatus: (_) => true,
+                  contentType: Headers.jsonContentType,
+                  responseType: ResponseType.json))
+          .timeout(const Duration(seconds: 10));
+      return response;
+    } catch (e) {
+      rethrow;
     }
   }
 }

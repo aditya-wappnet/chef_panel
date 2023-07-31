@@ -1,13 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_final_fields, must_be_immutable
 
+import 'package:chef_panel/models/order_model.dart';
+import 'package:chef_panel/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
-import 'package:chef_panel/models/order_model.dart';
-import 'package:chef_panel/widgets/app_button.dart';
 
 import '../../provider/get_all_order.dart';
 import '../../widgets/custom_dailog.dart';
@@ -39,7 +38,7 @@ class OrderDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orderProvider = Provider.of<GetOrders>(context);
+    final orderProvider = Provider.of<OrderProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -170,7 +169,7 @@ class OrderDetailScreen extends StatelessWidget {
                                       btn2Text: "Cancel",
                                       icon: const Icon(Icons.clear),
                                       onClicked: () {
-                                        orderProvider.cancelOrder(id, context);
+                                        orderProvider.cancelOrder(id!, context);
                                         Navigator.pop(context);
                                       });
                                 });

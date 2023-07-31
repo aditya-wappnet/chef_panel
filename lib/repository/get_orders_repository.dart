@@ -5,23 +5,23 @@ import 'package:chef_panel/network/network_api_services.dart';
 import 'package:chef_panel/services/api_end_points.dart';
 
 class OrderRepository {
-  BaseApiServices _apiServices = NetworkApiService();
+  final BaseApiService _apiServices = NetworkApiService();
 
-  Future<dynamic> getOrders() async {
+  getOrders() {
     try {
-      dynamic response = await _apiServices.getGetApiResponse(
+      return _apiServices.getGetApiResponse(
           ApiEndPoint.baseUrl + ApiEndPoint.orders.getOrders);
-
-      return response;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<dynamic> updateOrderStatus(dynamic param, String status) async {
+  updateOrderStatus(dynamic param, String status) async {
+    var data = {};
     try {
-      dynamic response = await _apiServices.getUpdateApiResponse(
-          '${ApiEndPoint.baseUrl + ApiEndPoint.orders.updateOrderStatus + param.toString()}/?status=$status');
+      dynamic response = await _apiServices.getPatchApiResponse(
+          '${ApiEndPoint.baseUrl + ApiEndPoint.orders.updateOrderStatus + param.toString()}/?status=$status',
+          data);
 
       return response;
     } catch (e) {
@@ -29,10 +29,10 @@ class OrderRepository {
     }
   }
 
-  Future<dynamic> cancelOrder(dynamic param) async {
+  cancelOrder(int id) async {
     try {
       dynamic response = await _apiServices.getDeleteApiResponse(
-          '${ApiEndPoint.baseUrl}${ApiEndPoint.orders.cancelOrder}$param/');
+          '${ApiEndPoint.baseUrl}${ApiEndPoint.orders.cancelOrder}$id/');
 
       return response;
     } catch (e) {

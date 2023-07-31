@@ -1,9 +1,12 @@
-abstract class BaseApiServices {
-  Future<dynamic> getGetApiResponse(String url);
+import 'package:dio/dio.dart';
 
-  Future<dynamic> getPostApiResponse(String url, dynamic data);
-
-  Future<dynamic> getUpdateApiResponse(String url);
-
-  Future<dynamic> getDeleteApiResponse(String url);
+abstract class BaseApiService {
+  Future<Response?> getGetApiResponse(String url);
+  Future<Response?> getAuthApiResponse(String url, dynamic data,
+      {String? verifyToken});
+  Future<Response?> getPostApiResponse(String url, dynamic data);
+  Future<Response?> getPatchApiResponse(String url, dynamic data);
+  Future<Response?> getDeleteApiResponse(String url);
+  Future<Response?> getGetApiResponseWithParams(String url, dynamic params);
+  Future<Response?> getPutApiResponse(String url, dynamic data);
 }

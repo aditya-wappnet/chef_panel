@@ -1,15 +1,15 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:chef_panel/firebase_options.dart';
+import 'package:chef_panel/provider/log_in_provider.dart';
+import 'package:chef_panel/provider/notification_provider.dart';
+import 'package:chef_panel/routes/app_route.dart';
+import 'package:chef_panel/screens/login_screen/login_screen.dart';
+import 'package:chef_panel/widgets/bottom_nav.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-
-import 'package:chef_panel/firebase_options.dart';
-import 'package:chef_panel/provider/log_in_provider.dart';
-import 'package:chef_panel/routes/app_route.dart';
-import 'package:chef_panel/screens/login_screen/login_screen.dart';
-import 'package:chef_panel/widgets/bottom_nav.dart';
 
 import 'provider/get_all_order.dart';
 
@@ -50,7 +50,10 @@ class _MyAppState extends State<MyApp> {
           create: (_) => LoginInProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => GetOrders(),
+          create: (_) => OrderProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotificationProvider(),
         ),
       ],
       child: ScreenUtilInit(

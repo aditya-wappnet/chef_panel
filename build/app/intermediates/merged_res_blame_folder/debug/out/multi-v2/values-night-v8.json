@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.chef_panel.app-mergeDebugResources-14:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.chef_panel.app-mergeDebugResources-16:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/wappnet-56/Documents/projects/chef_panel/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/wappnet-58/StudioProjects/chef_panel/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
