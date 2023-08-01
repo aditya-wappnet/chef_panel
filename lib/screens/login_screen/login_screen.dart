@@ -1,17 +1,15 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_const_constructors_in_immutables
-
-import 'package:chef_panel/provider/log_in_provider.dart';
-import 'package:chef_panel/widgets/app_button.dart';
-import 'package:chef_panel/widgets/build_text_form.dart';
+import 'package:chef_panel/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../helper/validation/validation.dart';
+import '../../helper/assets/assets_util.dart';
+import '../../helper/constant/styles.dart';
+import '../../helper/responsive.dart';
+import '../../widgets/custom_button_widget.dart';
+import '../../widgets/custom_textform_field_widget.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -33,146 +31,144 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<LoginInProvider>(context);
-    final size = MediaQuery.of(context).size;
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Scaffold(
-            resizeToAvoidBottomInset: true,
-            key: scaffoldKey,
-            body: SingleChildScrollView(
-              child: Form(
-                key: logininFormKey,
-                child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.sp),
-                    width: size.width,
-                    height: size.height,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.black, Colors.white],
-                        stops: [0.4, 1],
-                        begin: AlignmentDirectional(0, -1),
-                        end: AlignmentDirectional(0, 1),
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        key: scaffoldKey,
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: wp(4, context), vertical: hp(2, context)),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: wp(40, context), // Adjust the percentage as needed
+                      height: wp(40,
+                          context), // Using the same percentage to maintain aspect ratio
+                      child: Image.asset(AssetsUtils.ASSETS_MOBILE_LOGIN_IMAGE),
+                    ),
+                    Text(
+                      'Chef Login',
+                      style: titleTextStyle,
+                    ),
+                    SizedBox(height: hp(2, context)),
+                    Text(
+                      "Enter your Credentials",
+                      style: textRegularStyle.copyWith(
+                        color: Colors.black38,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: hp(2, context)), // Use hp() for height
+                    Form(
+                      key: logininFormKey,
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            CustomTextFormField().getCustomEditTextArea(
+                              labelValue: "Email",
+                              hintValue: "Enter Email",
+                              obscuretext: false,
+                              maxLines: 1,
+                              keyboardType: TextInputType.emailAddress,
+                              prefixicon: const Icon(
+                                Icons.email_outlined,
+                                color: Colors.black,
+                              ),
+                              textInputAction: TextInputAction.next,
+                              controller: authProvider.signemailController,
+                              onchanged: (newValue) {},
+                              validator: (p0) {
+                                return null;
+                              },
+                            ),
+                            SizedBox(
+                                height: hp(2, context)), // Use hp() for height
+                            ValueListenableBuilder(
+                              valueListenable: obsecurePassword,
+                              builder: (context, value, child) {
+                                return CustomTextFormField()
+                                    .getCustomEditTextArea(
+                                        labelValue: "Password",
+                                        hintValue: "Enter Password",
+                                        obscuretext: obsecurePassword.value,
+                                        maxLines: 1,
+                                        validator: (p0) {
+                                          return null;
+                                        },
+                                        textInputAction: TextInputAction.done,
+                                        prefixicon: const Icon(
+                                          Icons.password_outlined,
+                                          color: Colors.black,
+                                        ),
+                                        controller:
+                                            authProvider.signpassController,
+                                        onchanged: (newValue) {},
+                                        icon: InkWell(
+                                          splashColor: Colors.transparent,
+                                          onTap: () {
+                                            obsecurePassword.value =
+                                                !obsecurePassword.value;
+                                          },
+                                          child: obsecurePassword.value
+                                              ? const Icon(
+                                                  Icons.visibility_off_outlined,
+                                                  color: Colors.black,
+                                                )
+                                              : const Icon(
+                                                  Icons.visibility_outlined,
+                                                  color: Colors.black,
+                                                ),
+                                        ));
+                              },
+                            ),
+                            SizedBox(
+                                height: hp(1, context)), // Use hp() for height
+                            SizedBox(
+                                height: hp(1, context)), // Use hp() for height
+                            SizedBox(
+                              height: hp(7.5, context), // Use hp() for height
+                              width: double.infinity,
+                              child: CustomButton(
+                                onPressed: () async {
+                                  if (logininFormKey.currentState!.validate()) {
+                                    authProvider.loginApi(
+                                      authProvider.signemailController.text,
+                                      authProvider.signpassController.text,
+                                      context,
+                                    );
+                                  }
+                                },
+                                child: authProvider.loading
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        "Login",
+                                        style: textBodyStyle.copyWith(
+                                            color: Colors.white),
+                                      ),
+                              ),
+                            ),
+                            SizedBox(height: hp(1, context)),
+                          ],
+                        ),
                       ),
                     ),
-                    alignment: const AlignmentDirectional(0, 0),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              width: double.infinity,
-                              constraints: BoxConstraints(
-                                maxWidth: 750.w,
-                              ),
-                              decoration: const BoxDecoration(),
-                              child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 20.sp),
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              'assets/images/ic_chef.png',
-                                              width: 270.w,
-                                              fit: BoxFit.fitWidth,
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          ' Welcome!',
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 58.sp,
-                                              color: Colors.white),
-                                        ),
-                                        Text(
-                                          'Use the form below to access your account.',
-                                          style: GoogleFonts.roboto(
-                                              fontSize: 32.sp,
-                                              color: Colors.white),
-                                        ),
-                                        BuildTextFormField(
-                                          errorTextColor: Colors.white,
-                                          isObserve: false,
-                                          controller:
-                                              provider.signemailController,
-                                          leftIcon: Icon(
-                                              Icons.person_outline_rounded,
-                                              color: Colors.white),
-                                          txtHint: 'Enter Email',
-                                          validation: emailValidator,
-                                        ),
-                                        ValueListenableBuilder(
-                                            valueListenable: obsecurePassword,
-                                            builder: (context, value, child) {
-                                              return BuildTextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.done,
-                                                  errorTextColor: Colors.white,
-                                                  controller: provider
-                                                      .signpassController,
-                                                  validation: passwordValidator,
-                                                  isObserve:
-                                                      obsecurePassword.value,
-                                                  leftIcon: const Icon(
-                                                      Icons.lock_outlined,
-                                                      color: Colors.white),
-                                                  txtHint: 'Enter Password',
-                                                  icon: IconButton(
-                                                      onPressed: () {
-                                                        obsecurePassword.value =
-                                                            !obsecurePassword
-                                                                .value;
-                                                      },
-                                                      icon: obsecurePassword
-                                                              .value
-                                                          ? const Icon(
-                                                              Icons
-                                                                  .visibility_off,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          : const Icon(
-                                                              Icons.visibility,
-                                                              color:
-                                                                  Colors.white,
-                                                            )));
-                                            }),
-                                        SizedBox(
-                                          height: 30.h,
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            if (logininFormKey.currentState!
-                                                .validate()) {
-                                              provider.loginApi(
-                                                  provider
-                                                      .signemailController.text
-                                                      .toString(),
-                                                  provider
-                                                      .signpassController.text
-                                                      .toString(),
-                                                  context);
-                                            } else {}
-                                          },
-                                          child: provider.loading == true
-                                              ? Center(
-                                                  child:
-                                                      CircularProgressIndicator())
-                                              : AppButton(
-                                                  sizes: 20,
-                                                  height: 60.h,
-                                                  text: 'SignIn'),
-                                        )
-                                      ])))
-                        ])),
+                  ],
+                ),
               ),
-            )));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

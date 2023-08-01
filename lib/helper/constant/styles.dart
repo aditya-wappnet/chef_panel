@@ -1,17 +1,50 @@
-/* 
+import 'package:chef_panel/helper/constant/strings.dart';
+import 'package:flutter/material.dart';
 
-TextStyle? poppinsHeadingStyle(
-    {Color? color,
-    FontWeight? fontWeight,
-    String? fontFamily,
-    TextOverflow? overflow,
-    double? fontSize}) {
-  return TextStyle(
-      overflow: overflow ?? TextOverflow.ellipsis,
-      fontSize: fontSize ?? 12.sp,
-      fontWeight: fontWeight ?? FontWeight.w500,
-      color: color ?? Colors.white,
-      fontFamily: fontFamily ?? FontFamliy.POPPINS);
-}
+TextStyle titleTextStyle = const TextStyle(
+  fontFamily: fontMedium, // weight: 500
+  fontSize: 24,
+  fontStyle: FontStyle.normal,
+);
+TextStyle smallTitleTextStyle = const TextStyle(
+  fontFamily: fontMedium, // weight: 500
+  fontSize: 22,
+  fontStyle: FontStyle.normal,
+);
 
- */
+TextStyle textBodyStyle = const TextStyle(
+  fontFamily: fontSemiBold, //  weight: 600
+  fontSize: 16,
+  fontStyle: FontStyle.normal,
+);
+
+TextStyle textRegularStyle = const TextStyle(
+  fontFamily: fontRegular, // weight: 400
+  fontSize: 16,
+  fontStyle: FontStyle.normal,
+);
+TextStyle textSmallRegularStyle = const TextStyle(
+  fontFamily: fontRegular, // weight: 400
+  fontSize: 14,
+  fontStyle: FontStyle.normal,
+);
+TextStyle smallRegularStyle = const TextStyle(
+  fontFamily: fontRegular, // weight: 400
+  fontSize: 12,
+  fontStyle: FontStyle.normal,
+);
+TextStyle textMediumStyle = const TextStyle(
+  fontFamily: fontMedium, // weight: 500
+  fontSize: 16,
+  fontStyle: FontStyle.normal,
+);
+TextStyle textSmallMediumStyle = const TextStyle(
+  fontFamily: fontMedium, // weight: 500
+  fontSize: 14,
+  fontStyle: FontStyle.normal,
+);
+TextStyle textSmallStyle = const TextStyle(
+  fontFamily: fontRegular, // weight: 400
+  fontSize: 14,
+  fontStyle: FontStyle.normal,
+);

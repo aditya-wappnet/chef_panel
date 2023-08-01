@@ -2,35 +2,33 @@ class NotificationModel {
   int? count;
   dynamic next;
   dynamic previous;
-  List<Results>? results;
+  List<NotificationData>? notificationData;
 
-  NotificationModel({this.count, this.next, this.previous, this.results});
+  NotificationModel(
+      {this.count, this.next, this.previous, this.notificationData});
 
-  NotificationModel.fromJson(Map<String, dynamic> json) {
-    count = json['count'];
-    next = json['next'];
-    previous = json['previous'];
-    if (json['results'] != null) {
-      results = <Results>[];
-      json['results'].forEach((v) {
-        results!.add(Results.fromJson(v));
-      });
-    }
-  }
+  factory NotificationModel.fromJson(Map<String, dynamic> json) =>
+      NotificationModel(
+        count: json['count'],
+        next: json['next'],
+        previous: json['previous'],
+        notificationData: List<NotificationData>.from(
+            json["results"].map((x) => NotificationData.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['count'] = count;
     data['next'] = next;
     data['previous'] = previous;
-    if (results != null) {
-      data['results'] = results!.map((v) => v.toJson()).toList();
+    if (notificationData != null) {
+      data['results'] = notificationData!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Results {
+class NotificationData {
   int? id;
   int? user;
   String? userName;
@@ -39,7 +37,7 @@ class Results {
   String? createdAt;
   bool? readStatus;
 
-  Results(
+  NotificationData(
       {this.id,
       this.user,
       this.userName,
@@ -48,15 +46,15 @@ class Results {
       this.createdAt,
       this.readStatus});
 
-  Results.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    user = json['user'];
-    userName = json['user_name'];
-    title = json['title'];
-    body = json['body'];
-    createdAt = json['created_at'];
-    readStatus = json['read_status'];
-  }
+  factory NotificationData.fromJson(Map<String, dynamic> json) =>
+      NotificationData(
+          id: json['id'],
+          user: json['user'],
+          userName: json['user_name'],
+          title: json['title'],
+          body: json['body'],
+          createdAt: json['created_at'],
+          readStatus: json['read_status']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

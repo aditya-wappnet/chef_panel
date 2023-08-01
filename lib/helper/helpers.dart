@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/log_in_provider.dart';
+import '../provider/auth_provider.dart';
 import '../widgets/custom_flush_bar_widget.dart';
 
 void showErrorFlushbar(BuildContext context, String message) {
@@ -26,7 +26,7 @@ void handleDioException(BuildContext context, dynamic exception) {
     if (exception.response?.statusCode == 401) {
       // showErrorFlushbar(context,
       //     AppLocalizations.of(context).translate('unauthorized_error_message'));
-      Provider.of<LoginInProvider>(context, listen: false).logout(context);
+      Provider.of<AuthProvider>(context, listen: false).logout(context);
       // Handle other status codes as needed
     } else {
       // showErrorFlushbar(

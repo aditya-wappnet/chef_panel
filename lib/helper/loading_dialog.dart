@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
 //show loading dialog when data processing
-void showCustomLoadingDialog(BuildContext context) async {
+showCustomLoadingDialog(BuildContext context) async {
   SimpleFontelicoProgressDialog dialog =
       SimpleFontelicoProgressDialog(context: context);
   dialog.show(
