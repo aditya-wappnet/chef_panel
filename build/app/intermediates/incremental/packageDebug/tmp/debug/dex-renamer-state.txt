@@ -1,4 +1,4 @@
-#Mon Jul 31 19:49:56 IST 2023
+#Tue Aug 01 19:56:43 IST 2023
 base.0=/home/wappnet-58/StudioProjects/chef_panel/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/home/wappnet-58/StudioProjects/chef_panel/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
 base.2=/home/wappnet-58/StudioProjects/chef_panel/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex

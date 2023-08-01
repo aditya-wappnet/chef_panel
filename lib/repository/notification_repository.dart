@@ -5,10 +5,10 @@ import '../services/api_end_points.dart';
 class NotificationRepository {
   final BaseApiService _apiServices = NetworkApiService();
 
-  getNotification({int? page}) async {
+  getNotification({String? param}) async {
     try {
       dynamic response = await _apiServices.getGetApiResponse(
-          ApiEndPoint.baseUrl + ApiEndPoint.notification.getNotifications);
+          "${ApiEndPoint.baseUrl}${ApiEndPoint.notification.getNotifications}$param");
 
       return response;
     } catch (e) {

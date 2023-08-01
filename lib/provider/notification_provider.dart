@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 
 import '../helper/helpers.dart';
@@ -6,19 +8,16 @@ import '../repository/notification_repository.dart';
 import '../widgets/custom_flush_bar_widget.dart';
 
 class NotificationProvider extends ChangeNotifier {
-  NotificationRepository notificationRepository = NotificationRepository();
+  final NotificationRepository _notificationRepository =
+      NotificationRepository();
 
-  List<Results> notificationList = [];
-
+  List<NotificationData> notificationList = [];
+  NotificationModel? notification_model;
   bool _loading = false;
 
   bool get loading => _loading;
 
-  int _currentPage = 1;
-  int _totalCount = 0;
-  bool _hasMoreData = true;
-
-  bool get hasMoreData => _hasMoreData;
+  int page = 1;
 
   setLoading(bool value) {
     _loading = value;
@@ -26,39 +25,30 @@ class NotificationProvider extends ChangeNotifier {
   }
 
   // get list of notification
-
-  // get list of notification
   getAllNotification(BuildContext context) {
-    if (!_hasMoreData) return; // Return if there is no more data to fetch
-    setLoading(true);
-    notificationRepository.getNotification(page: _currentPage).then((response) {
-      setLoading(false);
+    _notificationRepository.getNotification(param: "").then((response) {
+      log(response.toString());
+      setLoading(true);
       if (response != null) {
         if (response.statusCode == 200) {
+          log("hiii");
           NotificationModel notificationModel =
               NotificationModel.fromJson(response.data);
-          if (_currentPage == 1) {
-            // If it's the first page, replace the data
-            notificationList = notificationModel.results!;
-            _totalCount = notificationModel.count!;
-          } else {
-            // If it's not the first page, append the data
-            notificationList.addAll(notificationModel.results!);
+          notification_model = notificationModel;
+          if (notificationList.isNotEmpty) {
+            notificationList.clear();
+            page = 1;
           }
-
-          // Update pagination variables
-          if (notificationList.length >= _totalCount) {
-            _hasMoreData = false;
-          } else {
-            _currentPage++;
-          }
-
+          notificationList.addAll(notificationModel.notificationData ?? []);
           notifyListeners();
+          setLoading(false);
         } else {
+          setLoading(false);
           CustomFlushbar.showError(context, response.data["message"],
               onDismissed: () {});
         }
       } else {
+        setLoading(false);
         // CustomFlushbar.showError(
         //     context,
         //     AppLocalizations.of(context)
@@ -66,14 +56,59 @@ class NotificationProvider extends ChangeNotifier {
         //     onDismissed: () {});
       }
     }).catchError((error) {
+      log(error.toString());
       handleDioException(context, error);
+      setLoading(false);
     });
+  }
+
+  Future<bool> getMoreNotifications() async {
+    if (notification_model?.next != null) {
+      page++;
+    }
+    if (notification_model?.next == null) {
+      page = 1;
+    }
+    notifyListeners();
+    String param = notification_model?.next != null ? "?page=$page" : "";
+    log("param : $param");
+    setLoading(false);
+    _notificationRepository.getNotification(param: param).then((response) {
+      setLoading(true);
+      if (response != null) {
+        if (notificationList.isEmpty) setLoading(false);
+        notifyListeners();
+        if (response.statusCode == 200) {
+          NotificationModel notificationModel =
+              NotificationModel.fromJson(response.data);
+          notification_model = notificationModel;
+          notificationList.addAll(notification_model!.notificationData ?? []);
+          notifyListeners();
+          setLoading(false);
+        } else {
+          setLoading(false);
+          notifyListeners();
+        }
+      } else {
+        setLoading(false);
+        // CustomFlushbar.showError(
+        //     context,
+        //     AppLocalizations.of(context)
+        //         .translate('error_occurred_error_message'),
+        //     onDismissed: () {});
+        notifyListeners();
+      }
+    }).catchError((error) {
+      setLoading(false);
+    });
+    await Future.delayed(const Duration(seconds: 0, milliseconds: 3000));
+    return true;
   }
 
   // delete notification
 
   deleteSingleNotification(int id, BuildContext context) {
-    notificationRepository.deleteSingleNotification(id).then((response) {
+    _notificationRepository.deleteSingleNotification(id).then((response) {
       if (response != null) {
         if (response.data["status"] == true) {
           // notificationList.removeWhere((item) => item. == id);
@@ -102,7 +137,7 @@ class NotificationProvider extends ChangeNotifier {
   // delete all notification
 
   deleteAllNotification(BuildContext context) {
-    notificationRepository.deleteAllNotification().then((response) {
+    _notificationRepository.deleteAllNotification().then((response) {
       if (response != null) {
         if (response.data["status"] == true) {
           notificationList.clear();

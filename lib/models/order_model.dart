@@ -37,7 +37,7 @@ class OrderData {
   String? paymentStatus;
   String? createdAt;
   String? totalPrice;
-  dynamic? remainingDuration;
+  dynamic remainingDuration;
   String? orderInstructions;
 
   OrderData(
