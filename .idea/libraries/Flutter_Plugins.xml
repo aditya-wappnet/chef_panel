@@ -22,6 +22,8 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.2.0" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.5.4" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/cloud_firestore-4.8.4" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/connectivity_plus-4.0.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.3.0" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

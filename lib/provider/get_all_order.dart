@@ -50,7 +50,7 @@ class OrderProvider with ChangeNotifier {
       if (response != null) {
         if (response.data['status'] == true) {
           setLoading(false);
-          Navigator.popAndPushNamed(context, RoutesName.bottomBar);
+          Navigator.popAndPushNamed(context, RoutesName.HOME_SCREEN_ROUTE);
         } else if (response.data['status'] == false) {
           setLoading(false);
           CustomFlushbar.showError(context, response.data['message'],

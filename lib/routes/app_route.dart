@@ -1,45 +1,65 @@
-import 'package:chef_panel/models/order_model.dart';
 import 'package:chef_panel/routes/routes_const.dart';
 import 'package:chef_panel/screens/home_screen.dart';
 import 'package:chef_panel/screens/login_screen/login_screen.dart';
 import 'package:chef_panel/screens/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/connectivity_provider.dart';
+import '../screens/no_internet_screen.dart';
 import '../screens/order_detail_screen/order_detail_screen.dart';
 import '../screens/orders_screen/orders_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    dynamic arguments = settings.arguments;
     switch (settings.name) {
-      case RoutesName.siginView:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const LoginScreen());
+      case RoutesName.LOGIN_SCREEN_ROUTE:
+        return _buildPageRoute(const LoginScreen());
 
-      case RoutesName.bottomBar:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const HomeScreen());
+      case RoutesName.HOME_SCREEN_ROUTE:
+        return _buildPageRoute(const HomeScreen());
 
-      case RoutesName.homeView:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const OrdersScreen());
+      case RoutesName.ORDERS_SCREEN_ROUTE:
+        return _buildPageRoute(const OrdersScreen());
 
-      case RoutesName.completedOrder:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => const NotificationScreen());
+      case RoutesName.NOTIFICATION_SCREEN_ROUTE:
+        return _buildPageRoute(const NotificationScreen());
 
-      case RoutesName.orderDetailView:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => OrderDetailScreen(
-                  orderData: OrderData(),
-                ));
-
+      case RoutesName.ORDER_DETAILS_SCREEN_ROUTE:
+        return _buildPageRoute(OrderDetailScreen(orderData: arguments));
       default:
-        // SystemNavigator.pop();
-        return MaterialPageRoute(builder: (_) {
-          return const Scaffold(
-            body: Center(child: Text('No route defined')),
-          );
-        });
+        return _buildPageRoute(const Scaffold(
+          body: Center(child: Text('No route defined')),
+        ));
     }
+  }
+
+  static PageRouteBuilder<Object> _buildPageRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
+        final isInternetAvailable =
+            Provider.of<ConnectivityProvider>(context).isInternetAvailable;
+        if (!isInternetAvailable) {
+          return const NoInternetScreen();
+        } else {
+          return page;
+        }
+      },
+      transitionsBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child) {
+        final Animation<Offset> slideAnimation = Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(CurvedAnimation(parent: animation, curve: Curves.easeInOut));
+        return SlideTransition(
+          position: slideAnimation,
+          child: child,
+        );
+      },
+      transitionDuration:
+          const Duration(milliseconds: 600), // Adjust the duration as needed
+    );
   }
 }
