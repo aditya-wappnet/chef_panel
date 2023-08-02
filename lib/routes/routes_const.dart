@@ -1,10 +1,8 @@
 class RoutesName {
-  static const String homeView = "/home_view";
-  static const String completedOrder = "/splash_view";
-
-  static const String bottomBar = "/bottomBar";
-
-  static const String siginView = "/sign_in_view";
-
-  static const String orderDetailView = "/order_detail_view";
+  static const String HOME_SCREEN_ROUTE = "/home_screen";
+  static const String LOGIN_SCREEN_ROUTE = "/login_screen";
+  static const String NOTIFICATION_SCREEN_ROUTE = "/notification_screen";
+  static const String ORDER_DETAILS_SCREEN_ROUTE = "/order_details_screen";
+  static const String ORDERS_SCREEN_ROUTE = "/orders_screen";
+  static const String SETTINGS_SCREEN_ROUTE = "/settings_screen";
 }

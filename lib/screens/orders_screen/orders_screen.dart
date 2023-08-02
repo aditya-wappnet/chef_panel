@@ -109,8 +109,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                               );
                                             },
                                             viewDetailsCallback: () {
-                                              Navigator.pushNamed(context,
-                                                  RoutesName.orderDetailView);
+                                              Navigator.pushNamed(
+                                                  context,
+                                                  RoutesName
+                                                      .ORDER_DETAILS_SCREEN_ROUTE,
+                                                  arguments: order);
                                             },
                                           );
                                         },

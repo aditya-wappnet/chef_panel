@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:chef_panel/repository/auth_repository.dart';
 import 'package:chef_panel/routes/routes_const.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../network/db_provider.dart';
@@ -26,16 +28,40 @@ class AuthProvider with ChangeNotifier {
     setLoading(true);
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     String? fcmToken = await messaging.getToken();
-    var data = {"email": email, "password": password, "fcmToken": fcmToken};
+    String deviceType = '';
+    if (!kIsWeb) {
+      // Get the device type for non-web platforms
+      if (Platform.isIOS) {
+        deviceType = 'iOS';
+      } else if (Platform.isAndroid) {
+        deviceType = 'Android';
+      } else if (Platform.isLinux) {
+        deviceType = 'Linux';
+      } else if (Platform.isMacOS) {
+        deviceType = 'MacOS';
+      } else if (Platform.isWindows) {
+        deviceType = 'Windows';
+      } else if (Platform.isFuchsia) {
+        deviceType = 'Fuchsia';
+      } else {
+        deviceType = '';
+      }
+    }
+    var data = {
+      "email": email,
+      "password": password,
+      "fcmToken": fcmToken,
+      "device_type": deviceType,
+    };
     log(data.toString());
     _authRepository.loginApi(data).then((response) {
-      log("response : " + response.toString());
+      log("response : $response");
       if (response != null) {
         if (response.statusCode == 200) {
           setLoading(false);
           String token = response.data['data']['token'];
           DatabaseProvider().saveToken(token);
-          Navigator.popAndPushNamed(context, RoutesName.bottomBar);
+          Navigator.popAndPushNamed(context, RoutesName.HOME_SCREEN_ROUTE);
           clearText();
           signemailController.clear();
           notifyListeners();
@@ -63,7 +89,7 @@ class AuthProvider with ChangeNotifier {
     DatabaseProvider().clear();
     Navigator.pushNamedAndRemoveUntil(
       context,
-      RoutesName.siginView,
+      RoutesName.LOGIN_SCREEN_ROUTE,
       (_) => false,
     );
   }
