@@ -10,6 +10,7 @@ firebase_messaging=/home/wappnet-58/.pub-cache/hosted/pub.dev/firebase_messaging
 firebase_messaging_web=/home/wappnet-58/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.5.4/
 firebase_storage=/home/wappnet-58/.pub-cache/hosted/pub.dev/firebase_storage-11.2.5/
 firebase_storage_web=/home/wappnet-58/.pub-cache/hosted/pub.dev/firebase_storage_web-3.6.5/
+flutter_local_notifications=/home/wappnet-58/.pub-cache/hosted/pub.dev/flutter_local_notifications-15.1.0+1/
 path_provider=/home/wappnet-58/.pub-cache/hosted/pub.dev/path_provider-2.0.15/
 path_provider_android=/home/wappnet-58/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27/
 path_provider_foundation=/home/wappnet-58/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.4/

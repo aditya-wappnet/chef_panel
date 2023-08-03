@@ -101,14 +101,16 @@ class OrderItemCardWidget extends StatelessWidget {
                         ],
                       )),
                   const Spacer(),
-                  GestureDetector(
-                    onTap: cancelCallback,
-                    child: Text(
-                      "Cancel?",
-                      style:
-                          textSmallRegularStyle.copyWith(color: Colors.purple),
-                    ),
-                  ),
+                  orderData.orderStatus == "pending"
+                      ? GestureDetector(
+                          onTap: cancelCallback,
+                          child: Text(
+                            "Cancel?",
+                            style: textSmallRegularStyle.copyWith(
+                                color: Colors.purple),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ],
               )
             ],

@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:chef_panel/models/order_model.dart';
 import 'package:chef_panel/repository/get_orders_repository.dart';
-import 'package:chef_panel/routes/routes_const.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/helpers.dart';
@@ -49,8 +48,10 @@ class OrderProvider with ChangeNotifier {
     await _orderRepository.updateOrderStatus(param, status).then((response) {
       if (response != null) {
         if (response.data['status'] == true) {
+          CustomFlushbar.showSuccess(context, response.data['message']);
+          getOrders(context);
           setLoading(false);
-          Navigator.popAndPushNamed(context, RoutesName.HOME_SCREEN_ROUTE);
+          // Navigator.popAndPushNamed(context, RoutesName.HOME_SCREEN_ROUTE);
         } else if (response.data['status'] == false) {
           setLoading(false);
           CustomFlushbar.showError(context, response.data['message'],
@@ -76,8 +77,8 @@ class OrderProvider with ChangeNotifier {
     _orderRepository.cancelOrder(id).then((response) {
       if (response != null) {
         if (response.data['status'] == true) {
-          orderList.removeWhere((item) => item.id == id);
           getOrders(context);
+          orderList.removeWhere((item) => item.id == id);
           CustomFlushbar.showSuccess(context, response.data['message'],
               onDismissed: () {});
           notifyListeners();
@@ -95,6 +96,7 @@ class OrderProvider with ChangeNotifier {
         notifyListeners();
       }
     }).catchError((error) {
+      print(error.toString());
       handleDioException(context, error);
       notifyListeners();
     });

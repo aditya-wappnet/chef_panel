@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:chef_panel/helper/responsive.dart';
-import 'package:chef_panel/provider/get_all_order.dart';
+import 'package:chef_panel/provider/order_provider.dart';
 import 'package:chef_panel/routes/routes_const.dart';
 import 'package:chef_panel/screens/orders_screen/widget/order_item_card_widget.dart';
 import 'package:flutter/material.dart';

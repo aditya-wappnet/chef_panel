@@ -48,9 +48,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 },
                 child: notificationProvider.notificationList.isNotEmpty
                     ? Text(
-                        "Clear all",
-                        style:
-                            textSmallRegularStyle.copyWith(color: Colors.red),
+                        "Clear All",
+                        style: textBodyStyle.copyWith(color: Colors.red),
                       )
                     : const SizedBox.shrink(),
               ),

@@ -2,6 +2,7 @@
 
 import 'package:chef_panel/helper/responsive.dart';
 import 'package:chef_panel/screens/notification/notification_screen.dart';
+import 'package:chef_panel/screens/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     const OrdersScreen(),
-    const NotificationScreen()
+    const NotificationScreen(),
+    const SettingsScreen()
   ];
 
   @override
@@ -54,6 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_none_outlined),
             label: "Notifications",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
           ),
         ],
         currentIndex: nav_provider.index,
