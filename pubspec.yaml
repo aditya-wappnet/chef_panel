@@ -53,11 +53,14 @@ dependencies:
   firebase_messaging: ^14.6.5
   dio: ^5.3.0
   another_flushbar: ^1.12.30
-  intl: ^0.18.1
+  intl: any
   loadmore: ^2.1.0
   flutter_slidable: ^3.0.0
   connectivity_plus: ^4.0.1
   cached_network_image: ^3.2.3
+  flutter_local_notifications: ^15.1.0+1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -80,10 +83,13 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/images/
+   - i18n/en.json
+   - i18n/ar.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

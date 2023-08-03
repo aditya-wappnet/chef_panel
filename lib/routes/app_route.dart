@@ -1,7 +1,9 @@
 import 'package:chef_panel/routes/routes_const.dart';
+import 'package:chef_panel/screens/change_language_screen/change_language_screen.dart';
 import 'package:chef_panel/screens/home_screen.dart';
 import 'package:chef_panel/screens/login_screen/login_screen.dart';
 import 'package:chef_panel/screens/notification/notification_screen.dart';
+import 'package:chef_panel/screens/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +30,13 @@ class Routes {
 
       case RoutesName.ORDER_DETAILS_SCREEN_ROUTE:
         return _buildPageRoute(OrderDetailScreen(orderData: arguments));
+
+      case RoutesName.SETTINGS_SCREEN_ROUTE:
+        return _buildPageRoute(const SettingsScreen());
+
+      case RoutesName.CHANGE_LANGUAGE_SCREEN_ROUTE:
+        return _buildPageRoute(const ChangeLanguageScreen());
+
       default:
         return _buildPageRoute(const Scaffold(
           body: Center(child: Text('No route defined')),
