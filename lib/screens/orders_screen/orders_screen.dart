@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_localizations.dart';
 import '../../helper/assets/assets_util.dart';
 import '../../helper/constant/styles.dart';
 import '../../widgets/custom_confirmation_dialog_widget.dart';
@@ -43,7 +44,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             scrolledUnderElevation: 0.0,
             automaticallyImplyLeading: false,
             title: Text(
-              "Orders",
+              AppLocalizations.of(context).translate('orders'),
               style: titleTextStyle,
             ),
           ),
@@ -69,12 +70,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 child: (order_provider.orderList.isEmpty)
                                     ? Container(
                                         alignment: Alignment.center,
-                                        child: const Column(
+                                        child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             PlaceholderWidget(
-                                                title: "No orders"),
+                                                title: AppLocalizations.of(
+                                                        context)
+                                                    .translate('no_orders')),
                                           ],
                                         ),
                                       )
@@ -93,9 +96,14 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                 builder:
                                                     (BuildContext context) {
                                                   return CustomConfirmationDialog(
-                                                    title: "Cancel Order",
-                                                    message:
-                                                        "are you sure you want to cancel the order ?",
+                                                    title: AppLocalizations.of(
+                                                            context)
+                                                        .translate(
+                                                            'cancel_order'),
+                                                    message: AppLocalizations
+                                                            .of(context)
+                                                        .translate(
+                                                            'cancel_order_message'),
                                                     onConfirm: () async {
                                                       order_provider
                                                           .cancelOrder(

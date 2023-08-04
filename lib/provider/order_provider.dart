@@ -4,6 +4,7 @@ import 'package:chef_panel/models/order_model.dart';
 import 'package:chef_panel/repository/get_orders_repository.dart';
 import 'package:flutter/material.dart';
 
+import '../app_localizations.dart';
 import '../helper/helpers.dart';
 import '../widgets/custom_flush_bar_widget.dart';
 
@@ -17,6 +18,14 @@ class OrderProvider with ChangeNotifier {
 
   setLoading(bool value) {
     _loading = value;
+    notifyListeners();
+  }
+
+  bool _showAnimation = false;
+  bool get showAnimation => _showAnimation;
+
+  setAnimation(bool value) {
+    _showAnimation = value;
     notifyListeners();
   }
 
@@ -39,7 +48,7 @@ class OrderProvider with ChangeNotifier {
     }).catchError((error) {
       setLoading(false);
       log(error.toString());
-      // handleDioException(context, error);
+      handleDioException(context, error);
     });
   }
 
@@ -59,11 +68,11 @@ class OrderProvider with ChangeNotifier {
         }
       } else {
         setLoading(false);
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
         notifyListeners();
       }
     }).catchError((error) {
@@ -88,11 +97,11 @@ class OrderProvider with ChangeNotifier {
           notifyListeners();
         }
       } else {
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
         notifyListeners();
       }
     }).catchError((error) {

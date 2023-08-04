@@ -1,38 +1,114 @@
-String? nameValidator(String? value) {
-  String pattern = r'^[a-zA-Z_-]+$';
-  RegExp regex = RegExp(pattern);
+import 'package:flutter/material.dart';
 
-  if (value!.isEmpty) {
-    return 'Please this field must be filled';
-  } else if (!regex.hasMatch(value)) {
-    return 'Please enter on alphabets only';
-  }
-  return null;
-}
+import '../../app_localizations.dart';
 
-String? emailValidator(String? value) {
+String? emailValidator(BuildContext context, String? value) {
   String pattern =
-      r"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$";
-
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = RegExp(pattern);
 
   if (value!.isEmpty) {
-    return 'Please this field must be filled';
+    return AppLocalizations.of(context).translate('field_must_filled');
   } else if (!regex.hasMatch(value)) {
-    return 'Please enter valid email';
+    return AppLocalizations.of(context).translate('valid_email_errror_message');
   }
   return null;
 }
 
-String? passwordValidator(String? value) {
+String? passwordValidator(BuildContext context, String? value) {
   String pattern =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regex = RegExp(pattern);
 
   if (value!.isEmpty) {
-    return 'Please this field must be filled';
-  } /* else if (!regex.hasMatch(value)) {
-    return 'Use 8 or more characters with a mix of capital and small \nletters,numbers & symbols';
-  } */
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else if (!regex.hasMatch(value)) {
+    return AppLocalizations.of(context)
+        .translate('strong_password_errror_message');
+  }
   return null;
+}
+
+String? phoneValidator(BuildContext context, String? value) {
+  String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+  RegExp regExp = RegExp(patttern);
+  if (value!.isEmpty) {
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else if (!regExp.hasMatch(value)) {
+    return AppLocalizations.of(context)
+        .translate('valid_phone_no_error_message');
+  }
+  return null;
+}
+
+String? validateName(BuildContext context, String? value) {
+  if (value!.isEmpty) {
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else if (value.length < 3) {
+    return AppLocalizations.of(context).translate('valid_name_error_message');
+  } else {
+    return null;
+  }
+}
+
+String? validateField(BuildContext context, String? value) {
+  if (value!.length > 100) {
+    return AppLocalizations.of(context)
+        .translate('100_character_limit_error_message');
+  } else {
+    return null;
+  }
+}
+
+String? validateDiscountCode(BuildContext context, String? value) {
+  const pattern = r'^[a-zA-Z0-9_]+$';
+  final regex = RegExp(pattern);
+  if (!regex.hasMatch(value!)) {
+    return AppLocalizations.of(context)
+        .translate('invalid_coupon_code_error_message');
+  } else {
+    return null;
+  }
+}
+
+String? cardValidator(BuildContext context, String? value) {
+  String patttern = r'^\d{16}$';
+  RegExp regExp = RegExp(patttern);
+  if (value!.isEmpty) {
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else if (!regExp.hasMatch(value)) {
+    return 'Please enter valid card number';
+  }
+  return null;
+}
+
+String? expiryDateValidation(BuildContext context, String? value) {
+  String patttern = r'^(0[1-9]|1[0-2])\/(\d\d\d\d)$';
+  RegExp regExp = RegExp(patttern);
+  if (value!.isEmpty) {
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else if (!regExp.hasMatch(value)) {
+    return AppLocalizations.of(context)
+        .translate('valid_date_validation_error_message');
+  }
+  return null;
+}
+
+String? cvvValidation(BuildContext context, String? value) {
+  String patttern = r'^\d{3,4}$';
+  RegExp regExp = RegExp(patttern);
+  if (value!.isEmpty) {
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else if (!regExp.hasMatch(value)) {
+    return 'Please enter valid cvv';
+  }
+  return null;
+}
+
+String? validateNotNull(BuildContext context, String? value) {
+  if (value!.isEmpty) {
+    return AppLocalizations.of(context).translate('field_must_filled');
+  } else {
+    return null;
+  }
 }

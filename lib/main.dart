@@ -18,7 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import 'app_localizations.dart';
@@ -205,8 +204,8 @@ class _MyAppState extends State<MyApp> {
                       animationDuration: const Duration(seconds: 2),
                       splashIconSize: 600.sp,
                       splash: Center(
-                        child: Lottie.asset(
-                          AssetsUtils.ASSETS_COOKING_ANIMATION,
+                        child: Image.asset(
+                          AssetsUtils.ASSETS_TABLE_MENU_IMAGE,
                           height: 500.h,
                           width: 500.w,
                         ),

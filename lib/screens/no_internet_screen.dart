@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../app_localizations.dart';
 import '../helper/assets/assets_util.dart';
 import '../helper/constant/strings.dart';
 import '../helper/constant/styles.dart';
@@ -23,17 +24,17 @@ class NoInternetScreen extends StatelessWidget {
               width: wp(50, context),
             ),
             Text(
-              "Woops!",
+              AppLocalizations.of(context).translate('whoops'),
               style: smallTitleTextStyle.copyWith(fontFamily: fontSemiBold),
             ),
             SizedBox(height: hp(1, context)),
-            const Text(
-                "No internet connectivity please check your internet connection"),
+            Text(AppLocalizations.of(context)
+                .translate('check_internet_message')),
             SizedBox(height: hp(1, context)),
             CustomOutlinedButton(
                 onPressed: () {},
                 child: Text(
-                  "Try again",
+                  AppLocalizations.of(context).translate('try_again'),
                   style: textSmallMediumStyle,
                 )),
           ],

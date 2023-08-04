@@ -6,6 +6,7 @@ import 'package:chef_panel/screens/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../app_localizations.dart';
 import '../provider/nav_provider.dart';
 import 'orders_screen/orders_screen.dart';
 
@@ -48,18 +49,18 @@ class _HomeScreenState extends State<HomeScreen> {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         useLegacyColorScheme: true,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.fastfood_outlined),
-            label: "Orders",
+            icon: const Icon(Icons.fastfood_outlined),
+            label: AppLocalizations.of(context).translate('orders'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined),
-            label: "Notifications",
+            icon: const Icon(Icons.notifications_none_outlined),
+            label: AppLocalizations.of(context).translate('notification'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
+            icon: const Icon(Icons.settings),
+            label: AppLocalizations.of(context).translate('settings'),
           ),
         ],
         currentIndex: nav_provider.index,

@@ -1,6 +1,8 @@
 import 'package:chef_panel/helper/constant/styles.dart';
 import 'package:flutter/material.dart';
 
+import '../app_localizations.dart';
+
 class CustomConfirmationDialog extends StatelessWidget {
   final String title;
   final String message;
@@ -23,14 +25,14 @@ class CustomConfirmationDialog extends StatelessWidget {
       content: Wrap(children: [Text(message)]),
       actions: <Widget>[
         TextButton(
-          child: const Text("Cancel"),
+          child: Text(AppLocalizations.of(context).translate('cancel')),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
           onPressed: onConfirm,
-          child: const Text("Ok"),
+          child: Text(AppLocalizations.of(context).translate('ok')),
         ),
       ],
     );

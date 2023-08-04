@@ -4,6 +4,7 @@ import 'package:chef_panel/routes/routes_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_localizations.dart';
 import '../../helper/constant/styles.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text(
-              "Settings",
+              AppLocalizations.of(context).translate('settings'),
               style: titleTextStyle,
             ),
             backgroundColor: Colors.white,
@@ -43,7 +44,8 @@ class SettingsScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "Change Language",
+                            AppLocalizations.of(context)
+                                .translate('change_language'),
                             style: textBodyStyle,
                           ),
                           const Spacer(),
@@ -66,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "Logout",
+                            AppLocalizations.of(context).translate('logout'),
                             style: textBodyStyle.copyWith(color: Colors.red),
                           ),
                         ],

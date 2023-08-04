@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../app_localizations.dart';
 import '../network/db_provider.dart';
 import '../widgets/custom_flush_bar_widget.dart';
 
@@ -71,11 +72,11 @@ class AuthProvider with ChangeNotifier {
           setLoading(false);
         }
       } else {
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
         setLoading(false);
       }
     }).catchError((error) {
