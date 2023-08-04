@@ -4,6 +4,8 @@ class AssetsUtils {
   static String ASSETS_COOKING_ANIMATION = "assets/images/ic_cooking.json";
   static String ASSETS_CHEF_ANIMATION = "assets/images/ic_chef.json";
   static String ASSETS_FOOD_ANIMATION = "assets/images/food.json";
+  static String ASSETS_FOOD_PREPARING_ANIMATION =
+      "assets/images/food_preparing_animation.json";
   static String ASSETS_LOADING_ANIMATION = "assets/images/loading-purple.json";
   static String ASSETS_EMPTY_MENU_IMAGE = "assets/images/empty-menu.png";
   static String ASSETS_MOBILE_LOGIN_IMAGE = "assets/images/mobile_login.png";

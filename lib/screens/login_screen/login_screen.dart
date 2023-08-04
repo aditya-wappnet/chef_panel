@@ -2,6 +2,7 @@ import 'package:chef_panel/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_localizations.dart';
 import '../../helper/assets/assets_util.dart';
 import '../../helper/constant/styles.dart';
 import '../../helper/responsive.dart';
@@ -54,12 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Image.asset(AssetsUtils.ASSETS_MOBILE_LOGIN_IMAGE),
                     ),
                     Text(
-                      'Chef Login',
+                      AppLocalizations.of(context).translate('chef_login'),
                       style: titleTextStyle,
                     ),
                     SizedBox(height: hp(2, context)),
                     Text(
-                      "Enter your Credentials",
+                      AppLocalizations.of(context)
+                          .translate('enter_your_credentials'),
                       style: textRegularStyle.copyWith(
                         color: Colors.black38,
                       ),
@@ -73,8 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Column(
                           children: [
                             CustomTextFormField().getCustomEditTextArea(
-                              labelValue: "Email",
-                              hintValue: "Enter Email",
+                              labelValue: AppLocalizations.of(context)
+                                  .translate('label_email'),
+                              hintValue: AppLocalizations.of(context)
+                                  .translate('hint_email'),
                               obscuretext: false,
                               maxLines: 1,
                               keyboardType: TextInputType.emailAddress,
@@ -96,8 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context, value, child) {
                                 return CustomTextFormField()
                                     .getCustomEditTextArea(
-                                        labelValue: "Password",
-                                        hintValue: "Enter Password",
+                                        labelValue: AppLocalizations.of(context)
+                                            .translate('label_password'),
+                                        hintValue: AppLocalizations.of(context)
+                                            .translate('hint_password'),
                                         obscuretext: obsecurePassword.value,
                                         maxLines: 1,
                                         validator: (p0) {
@@ -151,7 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         color: Colors.white,
                                       )
                                     : Text(
-                                        "Login",
+                                        AppLocalizations.of(context)
+                                            .translate('login'),
                                         style: textBodyStyle.copyWith(
                                             color: Colors.white),
                                       ),

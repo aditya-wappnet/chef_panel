@@ -4,6 +4,8 @@ import 'package:chef_panel/provider/AppLanguage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_localizations.dart';
+
 class ChangeLanguageScreen extends StatelessWidget {
   const ChangeLanguageScreen({super.key});
 
@@ -15,7 +17,7 @@ class ChangeLanguageScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text(
-              "Change Language",
+              AppLocalizations.of(context).translate('change_language'),
               style: titleTextStyle,
             ),
             backgroundColor: Colors.white,
@@ -28,7 +30,9 @@ class ChangeLanguageScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Select Language", style: textRegularStyle),
+                  Text(
+                      AppLocalizations.of(context).translate('select_language'),
+                      style: textRegularStyle),
                   const Divider(),
                   SizedBox(
                     height: hp(1, context),

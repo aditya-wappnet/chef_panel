@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
+import '../app_localizations.dart';
 import '../helper/helpers.dart';
 import '../models/notification_model.dart';
 import '../repository/notification_repository.dart';
@@ -49,11 +50,11 @@ class NotificationProvider extends ChangeNotifier {
         }
       } else {
         setLoading(false);
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
       }
     }).catchError((error) {
       log(error.toString());
@@ -91,11 +92,6 @@ class NotificationProvider extends ChangeNotifier {
         }
       } else {
         setLoading(false);
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
         notifyListeners();
       }
     }).catchError((error) {
@@ -121,11 +117,11 @@ class NotificationProvider extends ChangeNotifier {
           notifyListeners();
         }
       } else {
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
         notifyListeners();
       }
     }).catchError((error) {
@@ -151,11 +147,11 @@ class NotificationProvider extends ChangeNotifier {
           notifyListeners();
         }
       } else {
-        // CustomFlushbar.showError(
-        //     context,
-        //     AppLocalizations.of(context)
-        //         .translate('error_occurred_error_message'),
-        //     onDismissed: () {});
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
         notifyListeners();
       }
     }).catchError((error) {

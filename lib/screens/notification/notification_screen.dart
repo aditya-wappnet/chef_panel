@@ -7,7 +7,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:loadmore/loadmore.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_localizations.dart';
 import '../../helper/constant/styles.dart';
+import '../../helper/functions/time_format_function.dart';
 import '../../provider/notification_provider.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -38,7 +40,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             scrolledUnderElevation: 0.0,
             automaticallyImplyLeading: false,
             title: Text(
-              "Notifications",
+              AppLocalizations.of(context).translate('notification'),
               style: titleTextStyle,
             ),
             actions: [
@@ -48,7 +50,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 },
                 child: notificationProvider.notificationList.isNotEmpty
                     ? Text(
-                        "Clear All",
+                        AppLocalizations.of(context).translate('clear_all'),
                         style: textBodyStyle.copyWith(color: Colors.red),
                       )
                     : const SizedBox.shrink(),
@@ -66,11 +68,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: CircularProgressIndicator(),
                   )
                 : notificationProvider.notificationList.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          PlaceholderWidget(title: "No notification"),
+                          PlaceholderWidget(
+                              title: AppLocalizations.of(context)
+                                  .translate('no_notification')),
                         ],
                       ))
                     : Column(
@@ -89,6 +93,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               textBuilder: DefaultLoadMoreTextBuilder.english,
                               child: ListView.builder(
                                 itemBuilder: (BuildContext context, int index) {
+                                  var notification = notificationProvider
+                                      .notificationList[index];
                                   return Slidable(
                                     key: UniqueKey(),
                                     closeOnScroll: true,
@@ -100,10 +106,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                           onTap: () async {
                                             notificationProvider
                                                 .deleteSingleNotification(
-                                                    notificationProvider
-                                                        .notificationList[index]
-                                                        .id!,
-                                                    context);
+                                                    notification.id!, context);
                                           },
                                           child: Container(
                                             height: double.infinity,
@@ -125,31 +128,47 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       ],
                                     ),
                                     child: Card(
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                          color: Colors.white,
-                                        ),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                                      elevation: 3.0,
+                                      color: notification.readStatus == true
+                                          ? Colors.grey.shade300
+                                          : Colors.white,
                                       child: ListTile(
-                                        title: Text(
-                                          notificationProvider
-                                              .notificationList[index].title!,
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          textAlign: TextAlign.start,
+                                        leading: Icon(
+                                          Icons.circle_notifications_outlined,
+                                          size: 40,
+                                          color: Colors.purple.shade200,
                                         ),
-                                        subtitle: Text(
-                                          notificationProvider
-                                              .notificationList[index].body!,
-                                          style: const TextStyle(
-                                            color: Color.fromRGBO(0, 0, 0, 1),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w100,
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 4.0),
+                                          child: Text(
+                                            notification.title!,
+                                            style: textBodyStyle,
                                           ),
+                                        ),
+                                        subtitle: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(notification.body!,
+                                                style: textSmallRegularStyle
+                                                    .copyWith(
+                                                  color:
+                                                      const Color(0xff848285),
+                                                )),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              getTimeAgo(
+                                                  notification.createdAt!),
+                                              style: smallRegularStyle.copyWith(
+                                                color: const Color(0xff848285),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),

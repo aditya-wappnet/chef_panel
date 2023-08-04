@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../app_localizations.dart';
 import '../../../helper/constant/strings.dart';
 import '../../../helper/constant/styles.dart';
+import '../../../helper/functions/time_format_function.dart';
 import '../../../helper/responsive.dart';
 import '../../../models/order_model.dart';
 import '../../../widgets/custom_outlined_button.dart';
@@ -36,21 +38,20 @@ class OrderItemCardWidget extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Table No ${orderData.tableNo.toString()}",
+                    "${AppLocalizations.of(context).translate('table_no')} ${orderData.tableNo.toString()}",
                     style: textSmallRegularStyle.copyWith(color: Colors.amber),
                   )
                 ],
               ),
               Text(
-                "time",
-                // formatDateTime(DateTime.parse(orderData.createdAt!)),
+                formatDateTime(DateTime.parse(orderData.createdAt!)),
                 style: textSmallRegularStyle.copyWith(fontFamily: fontSemiBold),
               ),
               SizedBox(height: hp(1.5, context)),
               Row(
                 children: [
                   Text(
-                    "${orderData.cartItems?.length} items",
+                    "${orderData.cartItems?.length} ${AppLocalizations.of(context).translate('items')}",
                     style: textSmallRegularStyle,
                   ),
                   const Spacer(),
@@ -58,7 +59,7 @@ class OrderItemCardWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        "₹ ${orderData.totalPrice}",
+                        "${AppLocalizations.of(context).translate('₹')} ${orderData.totalPrice}",
                         style: textSmallRegularStyle.copyWith(
                             fontFamily: fontSemiBold),
                       ),
@@ -69,7 +70,7 @@ class OrderItemCardWidget extends StatelessWidget {
               SizedBox(
                 height: hp(0.4, context),
               ),
-              orderData.cartItems?.length == 0
+              orderData.cartItems!.isEmpty
                   ? const SizedBox.shrink()
                   : Row(
                       children: [
@@ -94,7 +95,8 @@ class OrderItemCardWidget extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "View details",
+                            AppLocalizations.of(context)
+                                .translate('view_details'),
                             style: textSmallRegularStyle,
                           ),
                           const Icon(Icons.arrow_right_outlined)
@@ -105,12 +107,16 @@ class OrderItemCardWidget extends StatelessWidget {
                       ? GestureDetector(
                           onTap: cancelCallback,
                           child: Text(
-                            "Cancel?",
+                            AppLocalizations.of(context).translate('cancel?'),
                             style: textSmallRegularStyle.copyWith(
                                 color: Colors.purple),
                           ),
                         )
-                      : const SizedBox.shrink(),
+                      : Text(
+                          orderData.orderStatus.toString(),
+                          style: textSmallRegularStyle.copyWith(
+                              color: Colors.purple),
+                        ),
                 ],
               )
             ],
