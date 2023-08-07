@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:chef_panel/helper/constant/strings.dart';
 import 'package:chef_panel/helper/responsive.dart';
 import 'package:chef_panel/widgets/placeholder_widget.dart';
 import 'package:flutter/material.dart';
@@ -143,7 +144,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                               bottom: 4.0),
                                           child: Text(
                                             notification.title!,
-                                            style: textBodyStyle,
+                                            style:
+                                                textSmallRegularStyle.copyWith(
+                                                    fontFamily: fontSemiBold),
                                           ),
                                         ),
                                         subtitle: Column(
@@ -153,8 +156,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(notification.body!,
-                                                style: textSmallRegularStyle
-                                                    .copyWith(
+                                                style:
+                                                    smallRegularStyle.copyWith(
                                                   color:
                                                       const Color(0xff848285),
                                                 )),
@@ -165,6 +168,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                               getTimeAgo(
                                                   notification.createdAt!),
                                               style: smallRegularStyle.copyWith(
+                                                fontSize: 11,
                                                 color: const Color(0xff848285),
                                               ),
                                             ),

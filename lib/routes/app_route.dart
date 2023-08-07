@@ -29,7 +29,7 @@ class Routes {
         return _buildPageRoute(const NotificationScreen());
 
       case RoutesName.ORDER_DETAILS_SCREEN_ROUTE:
-        return _buildPageRoute(OrderDetailScreen(orderData: arguments));
+        return _buildPageRoute(OrderDetailScreen(orderId: arguments));
 
       case RoutesName.SETTINGS_SCREEN_ROUTE:
         return _buildPageRoute(const SettingsScreen());

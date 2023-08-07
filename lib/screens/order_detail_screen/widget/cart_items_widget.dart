@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../helper/assets/assets_util.dart';
 import '../../../helper/responsive.dart';
-import '../../../models/order_model.dart';
+import '../../../models/order_details_model.dart';
 
 class CartItemsWidget extends StatelessWidget {
   const CartItemsWidget({super.key, this.cartItems});
@@ -19,7 +19,7 @@ class CartItemsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CachedNetworkImage(
-              imageUrl: cartItems!.itemImage.toString(),
+              imageUrl: cartItems?.itemImage ?? "",
               fit: BoxFit.cover,
               width: wp(18, context),
               height: hp(9, context),
@@ -32,14 +32,14 @@ class CartItemsWidget extends StatelessWidget {
               width: wp(3, context),
             ),
             Text(
-              "${cartItems!.quantity}x",
+              "${cartItems?.quantity ?? 0}x",
               style: textBodyStyle,
             ),
             SizedBox(
               width: wp(2, context),
             ),
             Text(
-              cartItems!.itemName.toString(),
+              cartItems?.itemName ?? "",
               style: textRegularStyle,
             ),
             SizedBox(
