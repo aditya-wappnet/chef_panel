@@ -79,5 +79,9 @@
   "order_items" : "Order Items",
   "start_preparing" : "Start Preparing",
   "complete_order" : "Complete Order",
-  "table_no" : "Table No "
+  "table_no" : "Table No ",
+  "view_details" : "View Details",
+  "change_language" : "Change Language",
+  "select_language" : "Select Language",
+  "order_details" : "Order Details"
 }

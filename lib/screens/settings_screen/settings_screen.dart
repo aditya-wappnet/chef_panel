@@ -1,3 +1,4 @@
+import 'package:chef_panel/helper/constant/strings.dart';
 import 'package:chef_panel/helper/responsive.dart';
 import 'package:chef_panel/provider/auth_provider.dart';
 import 'package:chef_panel/routes/routes_const.dart';
@@ -69,7 +70,8 @@ class SettingsScreen extends StatelessWidget {
                         children: [
                           Text(
                             AppLocalizations.of(context).translate('logout'),
-                            style: textBodyStyle.copyWith(color: Colors.red),
+                            style: textSmallRegularStyle.copyWith(
+                                color: Colors.red, fontFamily: fontSemiBold),
                           ),
                         ],
                       ),

@@ -39,4 +39,14 @@ class OrderRepository {
       rethrow;
     }
   }
+
+  getOrderDetails(int id) async {
+    var query = {'order_id': id};
+    try {
+      return _apiServices.getGetApiResponseWithParams(
+          ApiEndPoint.baseUrl + ApiEndPoint.orders.getOrders, query);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

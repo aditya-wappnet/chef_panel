@@ -14,6 +14,7 @@
   "ok": "موافق",
   "email_label": "البريد الإلكتروني",
   "email_hint": "أدخل البريد الإلكتروني",
+  "label_cooking_instruction" : "تعليمات الطبخ",
   "add_text": "جمع",
   "my_order": "طلبي",
   "add_items": "إضافة عناصر",
@@ -78,5 +79,9 @@
   "order_items" : "طلب بضاعة",
   "start_preparing" : "ابدأ في التحضير",
   "complete_order" : "اكمل الطلب",
-  "table_no" : "رقم الجدول"
+  "table_no" : "رقم الجدول",
+  "view_details" : "عرض التفاصيل",
+  "change_language" : "تغيير اللغة",
+  "select_language" : "اختار اللغة",
+  "order_details" : "تفاصيل الطلب"
 }

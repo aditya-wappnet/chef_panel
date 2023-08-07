@@ -1,7 +1,8 @@
 import 'dart:developer';
 
+import 'package:chef_panel/models/order_details_model.dart';
 import 'package:chef_panel/models/order_model.dart';
-import 'package:chef_panel/repository/get_orders_repository.dart';
+import 'package:chef_panel/repository/orders_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../app_localizations.dart';
@@ -57,8 +58,8 @@ class OrderProvider with ChangeNotifier {
     await _orderRepository.updateOrderStatus(param, status).then((response) {
       if (response != null) {
         if (response.data['status'] == true) {
-          CustomFlushbar.showSuccess(context, response.data['message']);
           getOrders(context);
+          CustomFlushbar.showSuccess(context, response.data['message']);
           setLoading(false);
           // Navigator.popAndPushNamed(context, RoutesName.HOME_SCREEN_ROUTE);
         } else if (response.data['status'] == false) {
@@ -108,6 +109,43 @@ class OrderProvider with ChangeNotifier {
       print(error.toString());
       handleDioException(context, error);
       notifyListeners();
+    });
+  }
+
+  // get single order by id
+  OrderDetail? orderDetail;
+  getOrderDetail(BuildContext context, int id) {
+    _orderRepository.getOrderDetails(id).then((response) async {
+      setLoading(true);
+      if (response != null) {
+        if (response.data['status'] == true) {
+          setLoading(false);
+          OrderDetailsModel orderDetailsModel =
+              OrderDetailsModel.fromJson(response.data);
+          orderDetail = orderDetailsModel.orderDetails!.first;
+          notifyListeners();
+        } else {
+          CustomFlushbar.showError(context, response.data['message'],
+              onDismissed: () {});
+          setLoading(false);
+        }
+      } else {
+        CustomFlushbar.showError(
+            context,
+            AppLocalizations.of(context)
+                .translate('error_occurred_error_message'),
+            onDismissed: () {});
+        setLoading(false);
+      }
+    }).catchError((error) {
+      CustomFlushbar.showError(
+          context,
+          AppLocalizations.of(context)
+              .translate('error_occurred_error_message'),
+          onDismissed: () {});
+      setLoading(false);
+      log(error.toString());
+      handleDioException(context, error);
     });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:chef_panel/helper/constant/strings.dart';
 import 'package:chef_panel/helper/constant/styles.dart';
 import 'package:chef_panel/helper/responsive.dart';
 import 'package:chef_panel/provider/AppLanguage.dart';
@@ -46,7 +47,8 @@ class ChangeLanguageScreen extends StatelessWidget {
                       children: [
                         Text(
                           "English (US)",
-                          style: textBodyStyle,
+                          style: textRegularStyle.copyWith(
+                              fontFamily: fontSemiBold),
                         ),
                         const Spacer(),
                         appLanguage.appLocal == const Locale('en', 'US')
@@ -74,7 +76,8 @@ class ChangeLanguageScreen extends StatelessWidget {
                       children: [
                         Text(
                           "Arabic",
-                          style: textBodyStyle,
+                          style: textRegularStyle.copyWith(
+                              fontFamily: fontSemiBold),
                         ),
                         const Spacer(),
                         appLanguage.appLocal == const Locale("ar")

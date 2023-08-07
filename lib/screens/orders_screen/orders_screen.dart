@@ -121,7 +121,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                   context,
                                                   RoutesName
                                                       .ORDER_DETAILS_SCREEN_ROUTE,
-                                                  arguments: order);
+                                                  arguments: order.id);
                                             },
                                           );
                                         },
