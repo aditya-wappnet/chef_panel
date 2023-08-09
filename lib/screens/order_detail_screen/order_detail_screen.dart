@@ -96,11 +96,12 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                           ),
                                           SizedBox(
                                             child: ListView.builder(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
                                               itemCount:
                                                   orderData.cartItem?.length ??
                                                       0,
                                               shrinkWrap: true,
-                                              scrollDirection: Axis.vertical,
                                               itemBuilder: (context, index) {
                                                 return CartItemsWidget(
                                                   cartItems: orderData

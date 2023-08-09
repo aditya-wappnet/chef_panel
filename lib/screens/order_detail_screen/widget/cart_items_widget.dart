@@ -26,7 +26,8 @@ class CartItemsWidget extends StatelessWidget {
               placeholder: (context, url) =>
                   Image.asset(AssetsUtils.ASSETS_PLACEHOLDER_IMAGE),
               // Show a placeholder while loading
-              errorWidget: (context, url, error) => const Placeholder(),
+              errorWidget: (context, url, error) =>
+                  Image.asset(AssetsUtils.ASSETS_ERROR_IMAGE),
             ),
             SizedBox(
               width: wp(3, context),

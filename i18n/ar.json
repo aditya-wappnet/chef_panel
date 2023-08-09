@@ -83,5 +83,9 @@
   "view_details" : "عرض التفاصيل",
   "change_language" : "تغيير اللغة",
   "select_language" : "اختار اللغة",
-  "order_details" : "تفاصيل الطلب"
+  "order_details" : "تفاصيل الطلب",
+  "load_fail_tap_to_retry" : "فشل التحميل ، انقر لإعادة المحاولة",
+  "wait_for_loading" : "انتظر التحميل",
+  "loading_wait_for_moment" : "جاري التحميل ، انتظر لحظة ...",
+  "no_route_defined" : "لم يتم تحديد مسار"
 }

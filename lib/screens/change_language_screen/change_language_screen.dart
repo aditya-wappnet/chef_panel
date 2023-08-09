@@ -1,7 +1,7 @@
 import 'package:chef_panel/helper/constant/strings.dart';
 import 'package:chef_panel/helper/constant/styles.dart';
 import 'package:chef_panel/helper/responsive.dart';
-import 'package:chef_panel/provider/AppLanguage.dart';
+import 'package:chef_panel/provider/app_language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

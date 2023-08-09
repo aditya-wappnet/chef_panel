@@ -92,11 +92,11 @@ class OrderData {
 }
 
 class CartItems {
-  dynamic? total;
+  dynamic total;
   int? quantity;
   String? itemName;
   String? itemImage;
-  dynamic? itemPrice;
+  dynamic itemPrice;
   int? itemId;
 
   CartItems(

@@ -51,11 +51,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
           body: SafeArea(
             child: Center(
               child: Consumer<OrderProvider>(
-                builder: (context, order_provider, __) {
+                builder: (context, orderProvider, __) {
                   return Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: wp(2, context), vertical: hp(2, context)),
-                    child: order_provider.loading
+                    child: orderProvider.loading
                         ? Center(
                             child: Lottie.asset(
                               AssetsUtils.ASSETS_LOADING_ANIMATION,
@@ -67,7 +67,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         : Column(
                             children: [
                               Expanded(
-                                child: (order_provider.orderList.isEmpty)
+                                child: (orderProvider.orderList.isEmpty)
                                     ? Container(
                                         alignment: Alignment.center,
                                         child: Column(
@@ -83,11 +83,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                       )
                                     : ListView.builder(
                                         itemCount:
-                                            order_provider.orderList.length,
+                                            orderProvider.orderList.length,
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (context, index) {
                                           var order =
-                                              order_provider.orderList[index];
+                                              orderProvider.orderList[index];
                                           return OrderItemCardWidget(
                                             orderData: order,
                                             cancelCallback: () {
@@ -105,10 +105,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                         .translate(
                                                             'cancel_order_message'),
                                                     onConfirm: () async {
-                                                      order_provider
-                                                          .cancelOrder(
-                                                              order.id!,
-                                                              context);
+                                                      orderProvider.cancelOrder(
+                                                          order.id!, context);
                                                       Navigator.of(context)
                                                           .pop();
                                                     },

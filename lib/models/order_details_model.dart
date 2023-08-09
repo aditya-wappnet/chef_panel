@@ -20,8 +20,8 @@ class OrderDetailsModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['message'] = message;
-    if (this.orderDetails != null) {
-      data['data'] = this.orderDetails!.map((v) => v.toJson()).toList();
+    if (orderDetails != null) {
+      data['data'] = orderDetails!.map((v) => v.toJson()).toList();
     }
     return data;
   }

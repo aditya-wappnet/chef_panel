@@ -91,7 +91,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     .getMoreNotifications();
                               },
                               delegate: const DefaultLoadMoreDelegate(),
-                              textBuilder: DefaultLoadMoreTextBuilder.english,
+                              textBuilder: (LoadMoreStatus status) {
+                                String text;
+                                switch (status) {
+                                  case LoadMoreStatus.fail:
+                                    text = AppLocalizations.of(context)
+                                        .translate("load_fail_tap_to_retry");
+                                    break;
+                                  case LoadMoreStatus.idle:
+                                    text = AppLocalizations.of(context)
+                                        .translate("wait_for_loading");
+                                    break;
+                                  case LoadMoreStatus.loading:
+                                    text = AppLocalizations.of(context)
+                                        .translate("loading_wait_for_moment");
+                                    break;
+                                  case LoadMoreStatus.nomore:
+                                    text = "";
+                                    break;
+                                  default:
+                                    text = "";
+                                }
+                                return text;
+                              },
                               child: ListView.builder(
                                 itemBuilder: (BuildContext context, int index) {
                                   var notification = notificationProvider

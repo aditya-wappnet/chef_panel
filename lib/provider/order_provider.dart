@@ -106,7 +106,6 @@ class OrderProvider with ChangeNotifier {
         notifyListeners();
       }
     }).catchError((error) {
-      print(error.toString());
       handleDioException(context, error);
       notifyListeners();
     });

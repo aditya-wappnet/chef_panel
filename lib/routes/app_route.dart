@@ -7,6 +7,8 @@ import 'package:chef_panel/screens/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../app_localizations.dart';
+import '../helper/helpers.dart';
 import '../provider/connectivity_provider.dart';
 import '../screens/no_internet_screen.dart';
 import '../screens/order_detail_screen/order_detail_screen.dart';
@@ -15,6 +17,7 @@ import '../screens/orders_screen/orders_screen.dart';
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     dynamic arguments = settings.arguments;
+    BuildContext? context = AppContext.navigatorKey.currentContext;
     switch (settings.name) {
       case RoutesName.LOGIN_SCREEN_ROUTE:
         return _buildPageRoute(const LoginScreen());
@@ -38,8 +41,10 @@ class Routes {
         return _buildPageRoute(const ChangeLanguageScreen());
 
       default:
-        return _buildPageRoute(const Scaffold(
-          body: Center(child: Text('No route defined')),
+        return _buildPageRoute(Scaffold(
+          body: Center(
+              child: Text(
+                  AppLocalizations.of(context!).translate("no_route_defined"))),
         ));
     }
   }

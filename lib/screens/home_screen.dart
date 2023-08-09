@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final nav_provider = Provider.of<NavProvider>(context);
+    final navProvider = Provider.of<NavProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           margin: EdgeInsets.symmetric(
               vertical: hp(0.5, context), horizontal: wp(0.5, context)),
           child: Center(
-            child: _widgetOptions.elementAt(nav_provider.index),
+            child: _widgetOptions.elementAt(navProvider.index),
           ),
         ),
       ),
@@ -63,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
             label: AppLocalizations.of(context).translate('settings'),
           ),
         ],
-        currentIndex: nav_provider.index,
+        currentIndex: navProvider.index,
         onTap: (int index) async {
-          nav_provider.changeIndex(index);
+          navProvider.changeIndex(index);
         },
       ),
     );

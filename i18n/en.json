@@ -83,5 +83,9 @@
   "view_details" : "View Details",
   "change_language" : "Change Language",
   "select_language" : "Select Language",
-  "order_details" : "Order Details"
+  "order_details" : "Order Details",
+  "load_fail_tap_to_retry" : "load fail, tap to retry",
+  "wait_for_loading" : "wait for loading",
+  "loading_wait_for_moment" : "loading, wait for moment ...",
+  "no_route_defined" : "No route defined"
 }
