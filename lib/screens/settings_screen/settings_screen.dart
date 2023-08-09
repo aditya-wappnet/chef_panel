@@ -14,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
-      builder: (context, auth_provider, __) {
+      builder: (context, authProvider, __) {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -63,7 +63,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        auth_provider.logout(context);
+                        authProvider.logout(context);
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,

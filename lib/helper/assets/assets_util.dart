@@ -11,7 +11,8 @@ class AssetsUtils {
   static String ASSETS_MOBILE_LOGIN_IMAGE = "assets/images/mobile_login.png";
   static String ASSETS_NO_INTERNET_IMAGE = "assets/images/no_internet.png";
   static String ASSETS_PLACEHOLDER_IMAGE =
-      "assets/images/placeholder_image.png";
+      "assets/images/image_placeholder.png";
   static String ASSETS_SUCCESS_IMAGE = "assets/images/sucsess_icon.png";
   static String ASSETS_TABLE_MENU_IMAGE = "assets/images/table-menu-logo.png";
+  static String ASSETS_ERROR_IMAGE = "assets/images/error_image.png";
 }

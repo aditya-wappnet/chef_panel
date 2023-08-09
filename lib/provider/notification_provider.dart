@@ -32,7 +32,6 @@ class NotificationProvider extends ChangeNotifier {
       setLoading(true);
       if (response != null) {
         if (response.statusCode == 200) {
-          log("hiii");
           NotificationModel notificationModel =
               NotificationModel.fromJson(response.data);
           notification_model = notificationModel;

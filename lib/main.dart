@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:chef_panel/firebase_options.dart';
 import 'package:chef_panel/helper/assets/assets_util.dart';
-import 'package:chef_panel/provider/AppLanguage.dart';
+import 'package:chef_panel/provider/app_language_provider.dart';
 import 'package:chef_panel/provider/auth_provider.dart';
 import 'package:chef_panel/provider/connectivity_provider.dart';
 import 'package:chef_panel/provider/nav_provider.dart';
@@ -12,10 +12,10 @@ import 'package:chef_panel/routes/app_route.dart';
 import 'package:chef_panel/routes/routes_const.dart';
 import 'package:chef_panel/screens/home_screen.dart';
 import 'package:chef_panel/screens/login_screen/login_screen.dart';
+import 'package:chef_panel/services/notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -40,40 +40,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
-
-  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-    alert: true,
-    badge: true,
-    sound: true,
-  );
-
+  await PushNotificationService().setupInteractedMessage();
   NetworkApiService().setupInterceptors();
   final isLoggedIn = await AuthProvider.checkUserLogin();
   AppLanguage appLanguage = AppLanguage();
   await appLanguage.fetchLocale();
   runApp(MyApp(isLoggedIn: isLoggedIn, appLanguage: appLanguage));
 }
-
-/// push notification configuration
-
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description: 'This channel is used for important notifications.',
-    // description
-    importance: Importance.high,
-    enableLights: true,
-    enableVibration: true,
-    showBadge: true,
-    playSound: true);
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
 
 class MyApp extends StatefulWidget {
   final bool? isLoggedIn;
@@ -89,71 +63,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    var initialzationSettingsAndroid =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettings =
-        InitializationSettings(android: initialzationSettingsAndroid);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-                color: Colors.purple,
-                enableLights: true,
-                enableVibration: true,
-                importance: Importance.high,
-                playSound: true,
-                ledOnMs: 1,
-                ledOffMs: 2,
-                ledColor: Colors.green,
-                priority: Priority.high,
-                // TODO add a proper drawable resource to android, for now using
-                //      one that already exists in example app.
-                icon: "@mipmap/ic_launcher",
-                channelShowBadge: true,
-              ),
-            ));
-      }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification!.android;
-      if (notification != null && android != null) {
-        showDialog(
-            // context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text(notification.title!),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(notification.body!)],
-                  ),
-                ),
-              );
-            },
-            context: context);
-      }
-    });
-
-    getToken();
-  }
-
-  late String token;
-
-  getToken() async {
-    token = (await FirebaseMessaging.instance.getToken())!;
   }
 
   @override
@@ -218,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                     locale: model.appLocal,
                     supportedLocales: const [
                       Locale('en', 'US'),
-                      Locale('ar', ''),
+                      Locale('ar', '')
                     ],
                     localizationsDelegates: const [
                       AppLocalizations.delegate,
